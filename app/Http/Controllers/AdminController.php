@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Gift;
+use App\Models\UserGiftRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ class AdminController extends Controller
         $todayGifts = Gift::whereDate('created_at', today())->count();
         $recentGifts = Gift::with('category')->latest()->take(10)->get();
         $recentUsers = \App\Models\User::where('role', '!=', 'admin')->latest()->take(10)->get();
+        $recentRequests = UserGiftRequest::with('category')->latest()->take(10)->get();
         
         $stats = [
             'total_users' => $totalUsers,
@@ -29,6 +31,7 @@ class AdminController extends Controller
             'today_gifts' => $todayGifts,
             'recent_users' => $recentUsers,
             'recent_gifts' => $recentGifts,
+            'recent_requests' => $recentRequests,
         ];
 
         return view('admin.dashboard', compact('categories', 'gifts', 'stats'));
