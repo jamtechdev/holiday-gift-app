@@ -1,0 +1,12 @@
+<svg width="960" height="420" viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="puzzleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2a2f3c" />
+            <stop offset="100%" stop-color="#1b1f2a" />
+        </linearGradient>
+    </defs>
+    <path
+        d="M70 15h155c0 25 24 45 55 45s55-20 55-45h260c0 25 24 45 55 45s55-20 55-45h175c38 0 60 22 60 60v60c-25 0-45 24-45 55s20 55 45 55v60c0 38-22 60-60 60H705c0 25-24 45-55 45s-55-20-55-45H335c0 25-24 45-55 45s-55-20-55-45H70c-38 0-60-22-60-60v-60c25 0 45-24 45-55S35 135 10 135V75C10 37 32 15 70 15Z"
+        fill="url(#puzzleGradient)" stroke="#3c4354" stroke-width="10" stroke-linejoin="round" />
+</svg>
+
