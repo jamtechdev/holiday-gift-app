@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gifts', function (Blueprint $table) {
+        Schema::create('user_gift_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('image')->nullable();
+            $table->string('street_address');
+            $table->string('city');
+            $table->string('state', 2);
+            $table->string('zip', 5);
+            $table->string('telephone', 10);
+            $table->string('email');
+            $table->string('company')->nullable();
+            $table->enum('status', ['pending', 'approved', 'shipped', 'delivered'])->default('pending');
             $table->timestamps();
         });
     }
@@ -25,7 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gifts');
+        Schema::dropIfExists('user_gift_requests');
     }
 };
-

@@ -26,7 +26,6 @@ class GiftController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'summary' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'image' => 'required|image|max:2048',
         ]);
@@ -35,9 +34,8 @@ class GiftController extends Controller
 
         Gift::create([
             'name' => $request->name,
-            'summary' => $request->summary,
             'category_id' => $request->category_id,
-            'image_path' => $imagePath,
+            'image' => $imagePath,
         ]);
 
         return redirect()->route('admin.gifts.index')->with('status', 'Gift created successfully.');
@@ -53,23 +51,21 @@ class GiftController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'summary' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
             'image' => 'nullable|image|max:2048',
         ]);
 
         $data = [
             'name' => $request->name,
-            'summary' => $request->summary,
             'category_id' => $request->category_id,
         ];
 
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($gift->image_path && Storage::disk('public')->exists($gift->image_path)) {
-                Storage::disk('public')->delete($gift->image_path);
+            if ($gift->image && Storage::disk('public')->exists($gift->image)) {
+                Storage::disk('public')->delete($gift->image);
             }
-            $data['image_path'] = $request->file('image')->store('gifts', 'public');
+            $data['image'] = $request->file('image')->store('gifts', 'public');
         }
 
         $gift->update($data);

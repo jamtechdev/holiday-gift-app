@@ -12,8 +12,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'accent_color',
-        'description',
+        'image',
     ];
 
     public function gifts(): HasMany

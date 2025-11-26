@@ -6,14 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Gift extends Model
+class UserGiftRequest extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'category_id',
         'name',
-        'image',
+        'street_address',
+        'city',
+        'state',
+        'zip',
+        'telephone',
+        'email',
+        'company',
+        'status',
     ];
 
     public function category(): BelongsTo
@@ -21,4 +28,3 @@ class Gift extends Model
         return $this->belongsTo(Category::class);
     }
 }
-
