@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="journey-page">
-    <div class="journey-content">
+    <!-- <div class="journey-content"> -->
         @yield('journey-content')
     <!-- </div> -->
 </div>
