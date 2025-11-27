@@ -27,7 +27,6 @@
 @endpush
 
 @section('content')
-@include('partials.loader')
 <div class="login-container">
     <div class="login-card">
         <div class="header">
@@ -37,7 +36,7 @@
             <p class="subtitle">Welcome back! Please sign in to continue.</p>
         </div>
 
-        <form method="POST" action="{{ route('admin.login') }}">
+        <form method="POST" action="{{ route('admin.login.submit') }}">
             @csrf
 
             @if ($errors->any())

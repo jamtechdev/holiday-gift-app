@@ -28,8 +28,8 @@ Route::get('/gift-request/success', [GiftRequestController::class, 'success'])->
 
 Route::prefix('admin')->name('admin.')->group(function () {
     // Admin login routes - authentication check handled in controller
-    Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'adminLogin']);
+    Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'adminLogin'])->name('login.submit');
     
     Route::middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
