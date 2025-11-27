@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', 'user')
+            ->orderBy('name')
+            ->paginate(8);
         return view('admin.users.index', compact('users'));
     }
 
@@ -29,14 +31,13 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
-            'role' => 'required|in:admin,user'
         ]);
 
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role
+            'role' => 'user'
         ]);
 
         return redirect()->route('admin.users.index');

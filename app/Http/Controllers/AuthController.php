@@ -75,10 +75,13 @@ class AuthController extends Controller
             return $this->redirectFor(Auth::user());
         }
 
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            'terms' => ['accepted'],
         ]);
+
+        $credentials = $request->only('email', 'password');
 
         $remember = $request->boolean('remember');
 

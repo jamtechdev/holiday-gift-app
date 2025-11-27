@@ -1,3 +1,46 @@
+.admin-btn,
+.admin-btn-sm {
+    background: linear-gradient(135deg, #f97373, #fb7185);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 999px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.admin-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+    box-shadow: 0 8px 18px rgba(249, 115, 115, 0.35);
+}
+
+.admin-btn-sm {
+    padding: 0.35rem 0.95rem;
+    font-size: 0.8rem;
+    box-shadow: 0 4px 12px rgba(249, 115, 115, 0.25);
+}
+
+.admin-btn:hover,
+.admin-btn-sm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(249, 115, 115, 0.35);
+}
+
+.admin-btn-danger {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
+}
+
+.admin-btn-danger:hover {
+    box-shadow: 0 12px 24px rgba(239, 68, 68, 0.45);
+}
+
 @import 'tailwindcss';
 
 * {
@@ -870,4 +913,288 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.table-head-cell {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.table-cell {
+    padding: 0.85rem 1rem;
+    font-size: 0.9rem;
+    color: #111827;
+    vertical-align: middle;
+}
+
+.table-cell .category-badge {
+    display: inline-flex;
+}
+
+.muted-text {
+    color: #6b7280;
+}
+
+.table-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.request-detail-card {
+    padding: 2.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
+
+.detail-page-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.detail-meta-card {
+    padding: 1.5rem 2rem;
+}
+
+.detail-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.detail-stat-card {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 18px;
+    padding: 1.25rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+}
+
+.detail-stats-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    color: #a1a1aa;
+    margin-bottom: 0.35rem;
+}
+
+.detail-stats-value {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+
+.detail-stats-meta {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.detail-eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    margin-bottom: 0.4rem;
+}
+
+.detail-title {
+    font-size: 1.75rem;
+    margin: 0;
+    color: #0f172a;
+}
+
+.detail-meta {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.detail-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.detail-section {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.detail-section-span {
+    grid-column: span 2;
+}
+
+.detail-status-section {
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .detail-section-span {
+        grid-column: span 1;
+    }
+}
+
+.detail-section-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #94a3b8;
+    margin-bottom: 0.75rem;
+}
+
+.detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex-grow: 1;
+}
+
+.detail-list div {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0.75rem;
+    align-items: baseline;
+}
+
+.detail-list dt {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+}
+
+.detail-list dd {
+    margin: 0;
+    color: #0f172a;
+    font-weight: 500;
+}
+
+@media (max-width: 640px) {
+    .detail-list div {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-list dt {
+        margin-bottom: 0.2rem;
+    }
+}
+
+.detail-gift {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.detail-gift img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+}
+
+.detail-gift-label {
+    font-size: 1.1rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+.status-card {
+    padding: 1.5rem;
+    border: 1px dashed rgba(248, 113, 113, 0.6);
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(248, 113, 113, 0.08),
+        rgba(248, 113, 113, 0.02)
+    );
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.status-form {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
+}
+
+.status-select {
+    border-radius: 999px;
+    padding: 0.55rem 1.25rem;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    color: #991b1b;
+}
+
+.gift-filter-toolbar {
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.gift-filter-form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.gift-filter-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+}
+
+.gift-filter-select {
+    min-width: 220px;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    background: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    color: #111827;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.gift-filter-select:focus {
+    outline: none;
+    border-color: #f87171;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2);
 }

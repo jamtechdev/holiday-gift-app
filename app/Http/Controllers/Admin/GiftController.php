@@ -12,7 +12,7 @@ class GiftController extends Controller
 {
     public function index()
     {
-        $gifts = Gift::with('category')->get();
+        $gifts = Gift::with('category')->paginate(8);
         return view('admin.gifts.index', compact('gifts'));
     }
 
