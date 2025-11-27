@@ -13,18 +13,41 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function showLogin(): View
+    public function showLogin(): View|RedirectResponse
     {
+        // If user is already authenticated, redirect them to their appropriate page
+        if (Auth::check()) {
+            return $this->redirectFor(Auth::user());
+        }
+        
         return view('auth.login');
     }
 
-    public function showAdminLogin(): View
+    public function showAdminLogin(): View|RedirectResponse
     {
+        // If user is already authenticated, redirect them to their appropriate page
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('user.journey');
+        }
+        
         return view('auth.admin-login');
     }
 
     public function adminLogin(Request $request): RedirectResponse
     {
+        // If already authenticated, redirect to appropriate page
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+            return redirect()->route('user.journey');
+        }
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -47,6 +70,11 @@ class AuthController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
+        // If already authenticated, redirect to appropriate page
+        if (Auth::check()) {
+            return $this->redirectFor(Auth::user());
+        }
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],

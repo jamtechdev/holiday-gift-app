@@ -10,10 +10,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserGiftRequestController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
-    Route::get('/', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/', [AuthController::class, 'login']);
-});
+// Login routes - authentication check handled in controller
+Route::get('/', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
@@ -28,10 +27,9 @@ Route::post('/gift-request', [GiftRequestController::class, 'store'])->name('gif
 Route::get('/gift-request/success', [GiftRequestController::class, 'success'])->name('gift-request.success');
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::middleware('guest')->group(function () {
-        Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('login');
-        Route::post('/login', [AuthController::class, 'adminLogin']);
-    });
+    // Admin login routes - authentication check handled in controller
+    Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'adminLogin']);
     
     Route::middleware('auth')->group(function () {
         Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');

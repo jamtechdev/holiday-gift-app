@@ -8,6 +8,7 @@
     @stack('styles')
 </head>
 <body>
+    @include('partials.loader')
     @yield('content')
 </body>
 </html>
