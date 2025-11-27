@@ -10,5 +10,6 @@
 <body>
     @include('partials.loader')
     @yield('content')
+    @stack('scripts')
 </body>
 </html>
