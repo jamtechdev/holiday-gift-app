@@ -3,6 +3,8 @@
 @section('title', 'Login')
 
 @section('content')
+
+<!-- //login -->
 <div class="login-container" style="background-image: url('{{ asset('images/login.png') }}');">
     <div class="puzzle-form-container">
         <form method="POST" action="/" class="puzzle-form">
