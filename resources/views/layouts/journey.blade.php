@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="journey-container">
-    <div class="step-card">
+    <!-- <div class="step-card"> -->
         @yield('journey-content')
-    </div>
+    <!-- </div> -->
 </div>
 @endsection
