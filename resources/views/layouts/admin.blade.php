@@ -5,7 +5,6 @@
 @endpush
 
 @section('content')
-@include('partials.loader')
 <div class="admin-layout">
     @include('partials.admin.sidebar')
 

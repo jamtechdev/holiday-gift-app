@@ -2,26 +2,44 @@
 
 @section('title', 'Users')
 @section('page-title', 'Users')
+@php use Illuminate\Support\Str; @endphp
 
 @section('admin-content')
-<div class="card">
-    <div class="flex justify-between items-center mb-6">
-        <h3>All Users</h3>
-        <div class="flex gap-2">
-            <button onclick="openExportModal()" class="admin-btn-sm">Export</button>
-            <button onclick="openImportModal()" class="admin-btn-sm">Import</button>
-            <a href="{{ route('admin.users.create') }}" class="admin-btn">Add User</a>
-        </div>
+<div class="card admin-user-toolbar">
+    <div>
+        <h3 style="margin-bottom: 0.25rem;">All Users</h3>
+        <p class="admin-list-text" style="margin: 0;">Manage recipients and admins in one place.</p>
     </div>
+    <div class="toolbar-actions">
+        <button onclick="openExportModal()" class="admin-btn-sm">Export</button>
+        <button onclick="openImportModal()" class="admin-btn-sm">Import</button>
+        <a href="{{ route('admin.users.create') }}" class="admin-btn">Add User</a>
+    </div>
+</div>
 
-    @foreach($users->where('is_admin', false) as $user)
-        <div class="admin-list-row">
-            <div class="admin-list-main">
-                <div class="admin-list-title">{{ $user->name }}</div>
-                <div class="admin-list-text">{{ $user->email }}</div>
-                <div class="admin-list-meta">Regular User</div>
+@if(session('status'))
+<div style="margin-bottom: 1.5rem; padding: 1rem; background: #d1fae5; color: #065f46; border-radius: 12px; border: 1px solid #a7f3d0;">
+    {{ session('status') }}
+</div>
+@endif
+
+@if($users->count() > 0)
+<div class="gift-grid-wrapper">
+    <div class="gift-grid gift-grid-4">
+        @foreach($users as $user)
+        <div class="gift-card user-card">
+            <div class="user-card-header">
+                <div class="user-avatar">{{ strtoupper(Str::substr($user->name, 0, 1)) }}</div>
+                <div>
+                    <div class="gift-title">{{ $user->name }}</div>
+                    <div class="user-email">{{ $user->email }}</div>
+                </div>
             </div>
-            <div class="admin-list-actions">
+            <div class="user-meta">
+                <span class="category-badge">{{ ucfirst($user->role) }}</span>
+                <span class="user-created">Joined {{ $user->created_at?->format('M d, Y') }}</span>
+            </div>
+            <div class="gift-actions">
                 <a href="{{ route('admin.users.edit', $user) }}" class="admin-btn-sm">Edit</a>
                 <form method="POST" action="{{ route('admin.users.destroy', $user) }}" style="display: inline;">
                     @csrf
@@ -30,8 +48,22 @@
                 </form>
             </div>
         </div>
-    @endforeach
+        @endforeach
+    </div>
+
+    @include('partials.admin.pagination', [
+    'paginator' => $users,
+    'itemLabel' => 'users'
+    ])
 </div>
+@else
+<div class="card" style="text-align: center; padding: 4rem 2rem;">
+    <div style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;">👥</div>
+    <h4 style="color: #374151; margin-bottom: 0.5rem;">No users found</h4>
+    <p style="color: #6b7280; margin-bottom: 2rem;">Start by creating your first user</p>
+    <a href="{{ route('admin.users.create') }}" class="admin-btn">Create First User</a>
+</div>
+@endif
 
 <!-- Export Modal -->
 <div id="exportModal" class="modal-overlay" style="display: none;">
@@ -81,22 +113,24 @@
     </div>
 </div>
 
+@push('scripts')
 <script>
-function openExportModal() {
-    document.getElementById('exportModal').style.display = 'flex';
-}
+    function openExportModal() {
+        document.getElementById('exportModal').style.display = 'flex';
+    }
 
-function closeExportModal() {
-    document.getElementById('exportModal').style.display = 'none';
-}
+    function closeExportModal() {
+        document.getElementById('exportModal').style.display = 'none';
+    }
 
-function openImportModal() {
-    document.getElementById('importModal').style.display = 'flex';
-}
+    function openImportModal() {
+        document.getElementById('importModal').style.display = 'flex';
+    }
 
-function closeImportModal() {
-    document.getElementById('importModal').style.display = 'none';
-}
+    function closeImportModal() {
+        document.getElementById('importModal').style.display = 'none';
+    }
 </script>
+@endpush
 
 @endsection

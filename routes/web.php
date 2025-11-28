@@ -39,8 +39,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);
         
         Route::get('/gift-requests', [UserGiftRequestController::class, 'index'])->name('gift-requests.index');
+        Route::get('/gift-requests-export', [UserGiftRequestController::class, 'export'])->name('gift-requests.export');
         Route::get('/gift-requests/{userGiftRequest}', [UserGiftRequestController::class, 'show'])->name('gift-requests.show');
-        Route::patch('/gift-requests/{userGiftRequest}/status', [UserGiftRequestController::class, 'updateStatus'])->name('gift-requests.update-status');
         Route::delete('/gift-requests/{userGiftRequest}', [UserGiftRequestController::class, 'destroy'])->name('gift-requests.destroy');
         
         Route::get('/users-export', [UserController::class, 'export'])->name('users.export');

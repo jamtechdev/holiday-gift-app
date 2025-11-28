@@ -20,13 +20,7 @@
             <input type="password" name="password" class="form-input" placeholder="Password" required>
         </div>
         
-        <div class="form-group">
-            <select name="role" class="form-input" required>
-                <option value="">Select Role</option>
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
+        <input type="hidden" name="role" value="user">
         
         <button type="submit" class="login-btn">Create User</button>
     </form>

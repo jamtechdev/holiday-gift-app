@@ -270,25 +270,24 @@ body {
 
 .main-content {
     flex: 1;
-    padding: 2rem 2.5rem;
+    padding: 0 2.5rem 2.5rem;
     background: transparent;
-    overflow-y: auto;
     min-height: 100vh;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.25rem 1.75rem;
-    border-radius: 24px;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    margin-bottom: 1.5rem;
+    padding: 1.25rem 2.5rem;
+        border-radius: 0;
+        background: linear-gradient(135deg, #0f172a, #1f2937);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.45);
+        margin: 0 -2.5rem 1.5rem;
     position: sticky;
     top: 0;
     z-index: 20;
@@ -432,7 +431,7 @@ body {
     box-shadow: 0 4px 12px rgba(249, 115, 115, 0.3);
     border: none;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .admin-btn:hover {
@@ -452,7 +451,7 @@ body {
     box-shadow: 0 2px 8px rgba(249, 115, 115, 0.3);
     border: none;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .admin-btn-sm:hover {
@@ -584,12 +583,15 @@ body {
     overflow: hidden;
     margin-bottom: 1rem;
     background: #f8f9fa;
+    display: flex;
+        align-items: center;
+        justify-content: center;
 }
 
 .gift-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
 }
 
 .gift-no-image {
@@ -638,6 +640,217 @@ body {
     border-top: 1px solid #e5e7eb;
 }
 
+.admin-user-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.gift-grid-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.gift-grid-wrapper::-webkit-scrollbar {
+    width: 10px;
+}
+
+.gift-grid-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+}
+
+.gift-grid-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+}
+
+.gift-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.gift-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1280px) {
+    .gift-grid-4 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .gift-grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .gift-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.gift-grid-wide {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+.pagination-wrapper {
+    margin: 2rem 0;
+    padding: 1.25rem 1.5rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: #f9fafb;
+    backdrop-filter: blur(8px);
+}
+
+.pagination-info {
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-btn {
+    min-width: 42px;
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.page-btn.active {
+    background: linear-gradient(135deg, #f97373, #fb7185);
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(249, 115, 115, 0.4);
+}
+
+.page-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.page-ellipsis {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0 0.5rem;
+}
+
+.request-meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.request-details {
+    font-size: 0.9rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.status-chip {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background: #fbbf24;
+    color: #472a00;
+}
+
+.status-approved {
+    background: #3b82f6;
+    color: #dbeafe;
+}
+
+.status-shipped {
+    background: #8b5cf6;
+    color: #ede9fe;
+}
+
+.status-delivered {
+    background: #10b981;
+    color: #ecfdf5;
+}
+
+.user-card .gift-actions {
+    border-top: none;
+    padding-top: 0;
+}
+
+.user-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.user-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: rgba(249, 115, 115, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fb7185;
+}
+
+.user-email {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.user-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.user-created {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
 .gift-image-round {
     width: 50px;
     height: 50px;
@@ -850,6 +1063,9 @@ body {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+        margin: 0 -1.5rem 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0;
     }
 
     .navbar-right {
@@ -859,6 +1075,15 @@ body {
     }
 
     .main-content {
-        padding: 1.5rem;
+        padding: 0 1.5rem 1.5rem;
+        }
+        
+        .gift-grid-wrapper {
+            padding-right: 0;
+        }
+        
+        .pagination-wrapper {
+            flex-direction: column;
+            align-items: flex-start;
     }
 }

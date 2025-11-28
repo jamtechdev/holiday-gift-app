@@ -37,6 +37,7 @@ input {
     width: 24px;
     height: 19px;
     margin-top: 0;
+    cursor: pointer;
 }
 .remember_me div {
     display: flex;
@@ -77,8 +78,13 @@ input {
             </div>
 
             <div class="remember_me">
-               <div class="terms-acknowledgement">
-                 <input type="checkbox" id="terms-checkbox" aria-describedby="terms-text" />
+              <div class="terms-acknowledgement">
+                <input type="checkbox"
+                       id="terms-checkbox"
+                       name="terms"
+                       value="1"
+                       aria-describedby="terms-text"
+                       required />
                  <span id="terms-text">
                     I accept Graphtech’s gift terms and my organization’s policy.
                  </span>

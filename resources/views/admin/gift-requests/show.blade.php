@@ -4,57 +4,92 @@
 @section('page-title', 'Gift Request Details')
 
 @section('admin-content')
-<div class="card">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <h3>Request Details</h3>
-        <a href="{{ route('admin.gift-requests.index') }}" class="admin-btn-sm">Back to List</a>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-        <div>
-            <h4 style="margin-bottom: 1rem; color: #111827;">Personal Information</h4>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">Name:</strong> {{ $userGiftRequest->name }}</div>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">Email:</strong> {{ $userGiftRequest->email }}</div>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">Phone:</strong> {{ $userGiftRequest->telephone }}</div>
-            @if($userGiftRequest->company)
-                <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">Company:</strong> {{ $userGiftRequest->company }}</div>
-            @endif
-        </div>
-        
-        <div>
-            <h4 style="margin-bottom: 1rem; color: #111827;">Address</h4>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">Street:</strong> {{ $userGiftRequest->street_address }}</div>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">City:</strong> {{ $userGiftRequest->city }}</div>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">State:</strong> {{ $userGiftRequest->state }}</div>
-            <div style="margin-bottom: 0.75rem; color: #374151;"><strong style="color: #111827;">ZIP:</strong> {{ $userGiftRequest->zip }}</div>
+<div class="detail-page-container">
+    <div class="card detail-meta-card">
+        <div class="detail-header">
+            <div>
+                <p class="detail-eyebrow">Request #{{ $userGiftRequest->id }}</p>
+                <h3 class="detail-title">{{ $userGiftRequest->name }}</h3>
+                <div class="detail-meta">
+                    Submitted on {{ $userGiftRequest->created_at->format('M d, Y \\a\\t h:i A') }}
+                    · {{ $userGiftRequest->email }}
+                </div>
+            </div>
+            <div class="detail-header-actions">
+                <a href="{{ route('admin.gift-requests.index') }}" class="admin-btn-sm">Back to List</a>
+            </div>
         </div>
     </div>
 
-    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                @if($userGiftRequest->category->image)
-                    <img src="{{ asset('storage/' . $userGiftRequest->category->image) }}" alt="{{ $userGiftRequest->category->name }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid #d1d5db;">
-                @endif
-                <div>
-                    <span class="category-badge">{{ $userGiftRequest->category->name }}</span>
-                    <div style="font-size: 0.9rem; color: #374151; margin-top: 0.25rem;">
-                        Requested on {{ $userGiftRequest->created_at->format('M d, Y') }}
+    <div class="detail-stats-grid">
+        <div class="detail-stat-card">
+            <p class="detail-stats-label">Category</p>
+            <h4 class="detail-stats-value">{{ $userGiftRequest->category->name }}</h4>
+            <span class="detail-stats-meta">Gift label selected</span>
+        </div>
+        <div class="detail-stat-card">
+            <p class="detail-stats-label">Location</p>
+            <h4 class="detail-stats-value">{{ $userGiftRequest->city }}, {{ $userGiftRequest->state }}</h4>
+            <span class="detail-stats-meta">{{ $userGiftRequest->zip }}</span>
+        </div>
+        <div class="detail-stat-card">
+            <p class="detail-stats-label">Submitted</p>
+            <h4 class="detail-stats-value">{{ $userGiftRequest->created_at->format('M d, Y') }}</h4>
+            <span class="detail-stats-meta">{{ $userGiftRequest->created_at->diffForHumans() }}</span>
+        </div>
+    </div>
+
+    <div class="card request-detail-card">
+        <div class="detail-grid">
+            <div class="detail-section detail-section-span">
+                <div class="detail-section-heading">Personal Information</div>
+                <dl class="detail-list">
+                    <div>
+                        <dt>Email</dt>
+                        <dd>{{ $userGiftRequest->email }}</dd>
+                    </div>
+                    <div>
+                        <dt>Phone</dt>
+                        <dd>{{ $userGiftRequest->telephone ?? '—' }}</dd>
+                    </div>
+                    <div>
+                        <dt>Company</dt>
+                        <dd>{{ $userGiftRequest->company ?? '—' }}</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-section-heading">Shipping Address</div>
+                <dl class="detail-list">
+                    <div>
+                        <dt>Street</dt>
+                        <dd>{{ $userGiftRequest->street_address }}</dd>
+                    </div>
+                    <div>
+                        <dt>City</dt>
+                        <dd>{{ $userGiftRequest->city }}</dd>
+                    </div>
+                    <div>
+                        <dt>State · ZIP</dt>
+                        <dd>{{ $userGiftRequest->state }} {{ $userGiftRequest->zip }}</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="detail-section detail-section-span">
+                <div class="detail-section-heading">Gift Selection</div>
+                <div class="detail-gift">
+                    @if($userGiftRequest->category->image)
+                        <img src="{{ asset('storage/' . $userGiftRequest->category->image) }}" alt="{{ $userGiftRequest->category->name }}">
+                    @endif
+                    <div>
+                        <div class="detail-gift-label">{{ $userGiftRequest->category->name }}</div>
+                        <p>Chosen category for this request.</p>
                     </div>
                 </div>
             </div>
-            
-            <form method="POST" action="{{ route('admin.gift-requests.update-status', $userGiftRequest) }}" style="display: flex; gap: 0.5rem; align-items: center;">
-                @csrf
-                @method('PATCH')
-                <select name="status" class="form-input" style="width: auto; padding: 0.5rem;">
-                    <option value="pending" {{ $userGiftRequest->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                    <option value="approved" {{ $userGiftRequest->status === 'approved' ? 'selected' : '' }}>Approved</option>
-                    <option value="shipped" {{ $userGiftRequest->status === 'shipped' ? 'selected' : '' }}>Shipped</option>
-                    <option value="delivered" {{ $userGiftRequest->status === 'delivered' ? 'selected' : '' }}>Delivered</option>
-                </select>
-                <button type="submit" class="admin-btn-sm">Update</button>
-            </form>
+
         </div>
     </div>
 </div>
