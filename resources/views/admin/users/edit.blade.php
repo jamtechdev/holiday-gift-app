@@ -21,13 +21,7 @@
             <input type="password" name="password" class="form-input" placeholder="New Password (leave blank to keep current)">
         </div>
         
-        <div class="form-group">
-            <select name="role" class="form-input" required>
-                <option value="">Select Role</option>
-                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-            </select>
-        </div>
+        <input type="hidden" name="role" value="{{ $user->role }}">
         
         <button type="submit" class="login-btn">Update User</button>
     </form>

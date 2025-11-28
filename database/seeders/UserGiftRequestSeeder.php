@@ -27,7 +27,6 @@ class UserGiftRequestSeeder extends Seeder
                 'telephone' => '9145238753',
                 'email' => 'mike.mikyska@graphtech.com',
                 'company' => 'Graphtech',
-                'status' => 'pending',
             ],
             [
                 'category_id' => $categories->random()->id,
@@ -39,7 +38,6 @@ class UserGiftRequestSeeder extends Seeder
                 'telephone' => '3051234567',
                 'email' => 'sarah.johnson@example.com',
                 'company' => 'Tech Solutions',
-                'status' => 'approved',
             ],
             [
                 'category_id' => $categories->random()->id,
@@ -51,7 +49,6 @@ class UserGiftRequestSeeder extends Seeder
                 'telephone' => '4079876543',
                 'email' => 'david.smith@company.com',
                 'company' => null,
-                'status' => 'shipped',
             ],
             [
                 'category_id' => $categories->random()->id,
@@ -63,7 +60,6 @@ class UserGiftRequestSeeder extends Seeder
                 'telephone' => '8135551234',
                 'email' => 'lisa.brown@email.com',
                 'company' => 'Creative Agency',
-                'status' => 'delivered',
             ],
         ];
 

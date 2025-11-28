@@ -16,20 +16,12 @@
                 </div>
             </div>
             <div class="detail-header-actions">
-                <span class="status-chip status-{{ $userGiftRequest->status }}">
-                    {{ ucfirst($userGiftRequest->status) }}
-                </span>
                 <a href="{{ route('admin.gift-requests.index') }}" class="admin-btn-sm">Back to List</a>
             </div>
         </div>
     </div>
 
     <div class="detail-stats-grid">
-        <div class="detail-stat-card">
-            <p class="detail-stats-label">Status</p>
-            <h4 class="detail-stats-value">{{ ucfirst($userGiftRequest->status) }}</h4>
-            <span class="detail-stats-meta">Updated {{ $userGiftRequest->updated_at?->diffForHumans() }}</span>
-        </div>
         <div class="detail-stat-card">
             <p class="detail-stats-label">Category</p>
             <h4 class="detail-stats-value">{{ $userGiftRequest->category->name }}</h4>
@@ -98,21 +90,6 @@
                 </div>
             </div>
 
-            <div class="detail-section detail-status-section detail-section-span">
-                <div class="detail-section-heading">Status & Timeline</div>
-                <p class="detail-meta">Update progress or hand off to fulfillment.</p>
-                <form method="POST" action="{{ route('admin.gift-requests.update-status', $userGiftRequest) }}" class="status-form">
-                    @csrf
-                    @method('PATCH')
-                    <select name="status" class="status-select">
-                        <option value="pending" {{ $userGiftRequest->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                        <option value="approved" {{ $userGiftRequest->status === 'approved' ? 'selected' : '' }}>Approved</option>
-                        <option value="shipped" {{ $userGiftRequest->status === 'shipped' ? 'selected' : '' }}>Shipped</option>
-                        <option value="delivered" {{ $userGiftRequest->status === 'delivered' ? 'selected' : '' }}>Delivered</option>
-                    </select>
-                    <button type="submit" class="admin-btn">Update Status</button>
-                </form>
-            </div>
         </div>
     </div>
 </div>

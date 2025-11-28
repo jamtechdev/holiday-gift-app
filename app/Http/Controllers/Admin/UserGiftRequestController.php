@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\UserGiftRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Str;
 
 class UserGiftRequestController extends Controller
@@ -35,16 +35,6 @@ class UserGiftRequestController extends Controller
     public function show(UserGiftRequest $userGiftRequest)
     {
         return view('admin.gift-requests.show', compact('userGiftRequest'));
-    }
-
-    public function updateStatus(Request $request, UserGiftRequest $userGiftRequest)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,approved,shipped,delivered'
-        ]);
-
-        $userGiftRequest->update(['status' => $request->status]);
-        return redirect()->back()->with('status', 'Status updated successfully.');
     }
 
     public function destroy(UserGiftRequest $userGiftRequest)

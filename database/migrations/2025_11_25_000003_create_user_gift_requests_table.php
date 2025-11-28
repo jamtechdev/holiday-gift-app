@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('telephone', 10);
             $table->string('email');
             $table->string('company')->nullable();
-            $table->enum('status', ['pending', 'approved', 'shipped', 'delivered'])->default('pending');
             $table->timestamps();
         });
     }

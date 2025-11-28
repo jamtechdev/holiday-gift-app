@@ -50,7 +50,6 @@
                         <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Email</th>
                         <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Gift Label</th>
                         <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Location</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Status</th>
                         <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Date</th>
                         <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Action</th>
                     </tr>
@@ -64,16 +63,6 @@
                                 <span class="category-badge">{{ $request->category->name }}</span>
                             </td>
                             <td style="padding: 0.75rem; color: #6b7280;">{{ $request->city }}, {{ $request->state }}</td>
-                            <td style="padding: 0.75rem;">
-                                <span style="background: 
-                                    @if($request->status === 'pending') #fbbf24
-                                    @elseif($request->status === 'approved') #3b82f6
-                                    @elseif($request->status === 'shipped') #8b5cf6
-                                    @else #10b981 @endif; 
-                                    color: white; padding: 0.25rem 0.5rem; border-radius: 8px; font-size: 0.75rem;">
-                                    {{ ucfirst($request->status) }}
-                                </span>
-                            </td>
                             <td style="padding: 0.75rem; color: #6b7280;">{{ $request->created_at->format('M d, Y') }}</td>
                             <td style="padding: 0.75rem;">
                                 <a href="{{ route('admin.gift-requests.show', $request) }}" class="admin-btn-sm">View</a>

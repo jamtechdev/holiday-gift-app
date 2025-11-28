@@ -45,7 +45,6 @@
                     <th class="table-head-cell">Street Address</th>
                     <th class="table-head-cell">Location</th>
                     <th class="table-head-cell">Company</th>
-                    <th class="table-head-cell">Status</th>
                     <th class="table-head-cell">Submitted</th>
                     <th class="table-head-cell">Actions</th>
                 </tr>
@@ -66,11 +65,6 @@
                         </td>
                         <td class="table-cell muted-text">
                             {{ $request->company ?? '—' }}
-                        </td>
-                        <td class="table-cell">
-                            <span class="status-chip status-{{ $request->status }}">
-                                {{ ucfirst($request->status) }}
-                            </span>
                         </td>
                         <td class="table-cell muted-text">
                             {{ $request->created_at?->format('M d, Y') }}
