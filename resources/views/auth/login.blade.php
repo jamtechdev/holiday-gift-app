@@ -15,6 +15,8 @@
     background-size: cover;
     padding: 40px 40px;
     min-height: 374px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 input {
     background: linear-gradient(to right, #2d2b2d, #444447) !important;
@@ -40,6 +42,15 @@ input {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.puzzle-form .error-message {
+    background: transparent;
+    color: #fecaca;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-top: -12px;
+    text-align: center;
+    font-size: 0.9rem;
 }
 </style>
 <div class="login-container" style="background-image: url('{{ asset('images/login.png') }}');background-size: contain;">

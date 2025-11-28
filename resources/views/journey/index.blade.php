@@ -37,7 +37,7 @@ video::-webkit-media-controls-start-playback-button {
 img.bgImage {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 .box {
     font-size: 14px;
@@ -65,11 +65,6 @@ img.bgImage {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-}
-.four {
-  -webkit-animation-delay: 3.5s;
-  -moz-animation-delay: 3.5s;
-  animation-delay: 1.5s;
 }
 .one, .two {
     top: auto;
@@ -141,6 +136,19 @@ img.bgImage {
   -moz-animation-delay: 1.5s;
   animation-delay: 5.5s;
 }
+.three {
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay: 1.5s;
+  animation-delay: 2s;
+}
+.four {
+  -webkit-animation-delay: 3.5s;
+  -moz-animation-delay: 3.5s;
+  animation-delay: 4s;
+}
+.three img {
+    max-width: 296px;
+}
 /*==== FADE IN UP ===*/
 @-webkit-keyframes fadeInUp {
   from {
@@ -182,6 +190,10 @@ img.bgImage {
 .one .overlayImg, .two .overlayImg {
     max-width: 44%;
 }
+.next-btn{
+    background: transparent!important;
+    box-shadow: none!important;
+}
 @-webkit-keyframes fadeInDown {
   0% {
     opacity: 0;
@@ -206,6 +218,38 @@ img.bgImage {
     transform: none;
   }
 }
+.runner {
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    animation-name: run-left-to-right;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    bottom: 1px;
+    object-fit: cover;
+    object-position: left;
+    animation-iteration-count: 1; /* Ensures it runs only once */
+}
+.video-overlay {
+    width: 100%;
+    height: 100vh;
+    display: block;
+    max-width: 1140px;
+    margin: 0px auto;
+    overflow: hidden;
+    position: relative;
+}
+@keyframes run-left-to-right {
+  0% {
+    left: -1145px;
+    /* transform: translateX(0); /* Alternative using transform */ */
+  }
+  100% {
+    left: calc(100% - 50px); /* Moves to the right edge, accounting for element width */
+    /* transform: translateX(calc(100vw - 50px)); /* Alternative using transform and viewport width */ */
+  }
+}
 </style>    
 
 <div class="video-overlay">
@@ -215,8 +259,14 @@ img.bgImage {
 </video>   -->
 <img src="{{ asset('images/landing.png') }}" class="bgImage" />
 
+<div class="box animate fadeInUp three">
+    <img src="{{ asset('images/welcome.png') }}" class="overlayImg" />
+</div>
+
 <div class="box animate fadeInRight four">
+  <a href="{{ route('journey.step', 1) }}" class="next-btn">
     <img src="{{ asset('images/02_INTRO PAGE_Gift button.png') }}" class="overlayImg" />
+  </a>  
 </div>
 
 <!-- <div class="box animate fadeInUp one">
@@ -226,6 +276,9 @@ img.bgImage {
 <div class="box animate fadeInDown two">
     <img src="{{ asset('images/puzzle2.png') }}" class="overlayImg" />
 </div> -->
+
+<img src="{{ asset('images/train.png') }}" class="runner" />
+
 
 </div>
 @endsection
