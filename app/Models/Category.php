@@ -19,13 +19,5 @@ class Category extends Model
     {
         return $this->hasMany(Gift::class);
     }
-
-    /**
-     * Scope to exclude donation categories (case-insensitive).
-     */
-    public function scopeExcludeDonation($query)
-    {
-        return $query->whereRaw('LOWER(name) != ?', ['donation']);
-    }
 }
 

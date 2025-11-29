@@ -22,7 +22,7 @@ class UserJourneyController extends Controller
      */
     public function giftCategories(): View
     {
-        $categories = Category::excludeDonation()->orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
         return view('journey.giftlabel', compact('categories'));
     }
