@@ -185,8 +185,21 @@
             }, 300);
         };
 
-        window.addEventListener('load', hideLoader);
+        // Minimum loader display time: 2 seconds to ensure it's visible
+        const minLoaderTime = 2000;
+        const startTime = Date.now();
+
+        const checkAndHideLoader = () => {
+            const elapsed = Date.now() - startTime;
+            const remaining = Math.max(0, minLoaderTime - elapsed);
+            
+            setTimeout(() => {
+                hideLoader();
+            }, remaining);
+        };
+
+        window.addEventListener('load', checkAndHideLoader);
         // Fallback in case 'load' never fires (e.g. cached assets)
-        setTimeout(hideLoader, 1500);
+        setTimeout(checkAndHideLoader, minLoaderTime);
     });
 </script>

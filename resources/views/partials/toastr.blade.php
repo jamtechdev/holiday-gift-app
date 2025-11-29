@@ -239,8 +239,8 @@
                 onclick: null,
                 showDuration: 300,
                 hideDuration: 300,
-                timeOut: 4000,  // Auto-hide after 4 seconds
-                extendedTimeOut: 1000,
+                timeOut: 6000,  // Auto-hide after 6 seconds (increased from 4)
+                extendedTimeOut: 2000,
                 showEasing: "swing",
                 hideEasing: "linear",
                 showMethod: "fadeIn",
@@ -248,24 +248,44 @@
                 tapToDismiss: true
             };
 
-            // Show toast for session flash messages
-            @if(session('success'))
-                toastr.success("{{ session('success') }}");
-            @endif
+            // Wait for loader to finish before showing toasts (minimum 2 seconds)
+            const loaderDelay = 2000;
+            const startTime = Date.now();
 
-            @if(session('error'))
-                toastr.error("{{ session('error') }}");
-            @endif
+            const showToasts = () => {
+                const elapsed = Date.now() - startTime;
+                const remaining = Math.max(0, loaderDelay - elapsed);
+                
+                setTimeout(() => {
+                    // Show toast for session flash messages
+                    @if(session('success'))
+                        toastr.success("{{ session('success') }}");
+                    @endif
 
-            @if(session('status'))
-                toastr.success("{{ session('status') }}");
-            @endif
+                    @if(session('error'))
+                        toastr.error("{{ session('error') }}");
+                    @endif
 
-            @if($errors->any())
-                @foreach($errors->all() as $error)
-                    toastr.error("{{ $error }}");
-                @endforeach
-            @endif
+                    @if(session('status'))
+                        toastr.success("{{ session('status') }}");
+                    @endif
+
+                    @if($errors->any())
+                        @foreach($errors->all() as $error)
+                            toastr.error("{{ $error }}");
+                        @endforeach
+                    @endif
+                }, remaining);
+            };
+
+            // Wait for page load and minimum delay
+            if (document.readyState === 'complete') {
+                showToasts();
+            } else {
+                window.addEventListener('load', showToasts);
+                // Fallback
+                setTimeout(showToasts, loaderDelay);
+            }
 
             // Use MutationObserver to convert emails to links when toast appears
             const observer = new MutationObserver(function(mutations) {
