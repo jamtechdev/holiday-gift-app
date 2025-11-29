@@ -46,6 +46,8 @@ img.overlayPuzzle {
     gap: 66px;
     display: flex;
     justify-content: center;
+    max-width: 80%;
+    margin: 0px auto;
     margin-top: 69px;
 }
 .boxes img {
@@ -108,6 +110,16 @@ img.overlayPuzzle {
                  0 0 20px rgba(220, 208, 143, 0.6),
                  0 0 30px rgba(220, 208, 143, 0.4);
     animation: blinkLight 1.5s ease-in-out infinite;
+}
+.backBtn a img {
+    margin: auto;
+}
+.backBtn a {
+    flex: 1;
+    text-align: center;
+}
+img.back:hover {
+    filter: sepia(1);
 }
 @keyframes blinkLight {
     0%, 100% {
@@ -440,6 +452,9 @@ img.overlayPuzzle {
     background: #555;
     transform: translateY(-2px);
 }
+.boxes a, .boxes button {
+    flex: 1;
+}
 </style>
 
 <div class="gift-container" style="background-image: url('{{ asset('images/SelectionBg.jpg') }}');">
@@ -506,18 +521,19 @@ img.overlayPuzzle {
             </div>
         @endif
 
-        <div class="backBtn">
-          <a href="#">
-            <img src="{{ asset('images/location.png') }}" />
-          </a>
-          <a href="{{ route('user.gift.categories') }}">
-            <img src="{{ asset('images/back.png') }}" class="back" />
-          </a>
-          <a href="#">
-
-          </a>
-        </div>
-
+            <div class="backBtn">
+                @if (strtolower($category->name ?? '') === 'donation')
+                    <a href="https://www.wildheartministries.net/">
+                        <img src="{{ asset('images/location.png') }}" />
+                    </a>
+                @endif
+                <a href="{{ route('user.gift.categories') }}">
+                    <img src="{{ asset('images/back.png') }}" class="back" />
+                </a>
+                <a href="#">
+ 
+                </a>
+            </div>
     </div>
 </div>
 

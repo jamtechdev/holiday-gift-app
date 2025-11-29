@@ -219,7 +219,7 @@ img.bgImage {
     height: 70px;
     position: absolute;
     animation-name: run-left-to-right;
-    animation-duration: 5s;
+    animation-duration: 3s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     bottom: 1px;
@@ -244,6 +244,33 @@ img.bgImage {
   100% {
     left: calc(100% - 50px); /* Moves to the right edge, accounting for element width */
     /* transform: translateX(calc(100vw - 50px)); /* Alternative using transform and viewport width */ */
+  }
+}
+/* 2. Apply the Animation to an Element */
+.animated-box {
+  /* Animation Properties */
+  animation-name: slideAndChange;
+  animation-duration: 3s; /* This is the key: the animation will complete and stop after 3 seconds. */
+  animation-fill-mode: forwards; /* This is important: it ensures the element stays in its final (100%) state. */
+  animation-timing-function: ease-in-out; /* Smooth start and end */
+}
+@keyframes slideAndChange {
+  0% {
+    transform: translateX(-1140px);
+  }
+  100% {
+    transform: translateX(10px); /* Move 300px to the right */
+  }
+}
+
+@media screen and (max-width: 767px){
+  @keyframes slideAndChange {
+    0% {
+      transform: translateX(-1140px);
+    }
+    100% {
+      transform: translateX(-100px); /* Move 300px to the right */
+    }
   }
 }
 </style>    
@@ -273,7 +300,7 @@ img.bgImage {
     <img src="{{ asset('images/puzzle2.png') }}" class="overlayImg" />
 </div> -->
 
-<img src="{{ asset('images/train.png') }}" class="runner" />
+<img src="{{ asset('images/train.png') }}" class="runner animated-box" />
 
 
 </div>

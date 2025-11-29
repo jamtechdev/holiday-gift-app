@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: "Montserrat", sans-serif!important;
+}
+
 .admin-btn,
 .admin-btn-sm {
     background: linear-gradient(135deg, #f97373, #fb7185);
