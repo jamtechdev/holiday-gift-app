@@ -310,17 +310,17 @@ img.overlayPuzzle {
         width: 98%;
         max-width: 100%;
     }
-    
+
     #alreadyClaimedModal .modal-body {
         padding: 30px 25px;
     }
-    
+
     #alreadyClaimedModal .warning-icon-container {
         flex-direction: column;
         text-align: center;
         gap: 20px;
     }
-    
+
     #alreadyClaimedModal .warning-icon {
         font-size: 60px;
         margin: 0 auto;
@@ -537,8 +537,8 @@ img.overlayPuzzle {
                         Our records show that you've already claimed your gift for this year.
                     </p>
                     <p>
-                        If this is unexpected or you have questions, please contact us at 
-                        <a href="mailto:info@thinkgraphtech.com">info@thinkgraphtech.com</a> 
+                        If this is unexpected or you have questions, please contact us at
+                        <a href="mailto:info@thinkgraphtech.com">info@thinkgraphtech.com</a>
                         so we can assist you.
                     </p>
                 </div>
@@ -627,7 +627,7 @@ function openModal(categoryId) {
         });
         return;
     }
-    
+
     document.getElementById('category_id').value = categoryId;
     document.getElementById('giftDetailsModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -639,37 +639,9 @@ function closeModal() {
     // Don't reset form if user wants to continue editing
 }
 
-function closeAlreadyClaimedModal() {
-    document.getElementById('alreadyClaimedModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
 function closeModalWithConfirm() {
     alert('Please fill out the form to continue to the next page. All fields are required.');
 }
-
-// Close modal when clicking outside of it - but prevent closing if form is required
-window.onclick = function(event) {
-    const modal = document.getElementById('giftDetailsModal');
-    const alreadyClaimedModal = document.getElementById('alreadyClaimedModal');
-    
-    if (event.target == modal) {
-        // Prevent closing by clicking outside - user must fill the form
-        // closeModal();
-    }
-    
-    if (event.target == alreadyClaimedModal) {
-        closeAlreadyClaimedModal();
-    }
-}
-
-// Close modal with Escape key - disabled to force form completion
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        // Prevent closing with Escape - user must fill the form
-        // closeModal();
-    }
-});
 
 // Auto-uppercase for state field
 document.getElementById('state').addEventListener('input', function(e) {
@@ -689,9 +661,6 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
     submitBtn.disabled = true;
     submitBtn.textContent = 'Submitting...';
 
-    // Get CSRF token from form
-    const csrfToken = formData.get('_token');
-
     fetch('{{ route("user.gift-request.store") }}', {
         method: 'POST',
         body: formData,
@@ -709,12 +678,12 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
     .then(data => {
         // Show success toastr
         toastr.success(data.message || 'Gift request submitted successfully! Your gift will be processed soon.');
-        
+
         // Close modal after short delay
         setTimeout(() => {
             document.getElementById('giftDetailsModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            
+
             // Redirect to next page
             const redirectTo = form.querySelector('input[name="redirect_to"]').value;
             window.location.href = redirectTo;
@@ -730,7 +699,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
             // Close form modal
             document.getElementById('giftDetailsModal').style.display = 'none';
             document.body.style.overflow = 'auto';
-            
+
             // Show error in toastr
             const errorMessage = error.message || 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
             toastr.error(errorMessage);
