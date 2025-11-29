@@ -26,7 +26,17 @@ class GiftController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => [
+                'required',
+                'exists:categories,id',
+                function ($attribute, $value, $fail) {
+                    // Check if a gift already exists for this category
+                    $existingGift = Gift::where('category_id', $value)->first();
+                    if ($existingGift) {
+                        $fail('A gift already exists for this category. Only one gift per category is allowed.');
+                    }
+                },
+            ],
             'image' => 'required|image|max:2048',
         ]);
 
@@ -51,7 +61,20 @@ class GiftController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => [
+                'required',
+                'exists:categories,id',
+                function ($attribute, $value, $fail) use ($gift) {
+                    // Check if another gift already exists for this category
+                    // Allow if it's the same gift being updated
+                    $existingGift = Gift::where('category_id', $value)
+                        ->where('id', '!=', $gift->id)
+                        ->first();
+                    if ($existingGift) {
+                        $fail('A gift already exists for this category. Only one gift per category is allowed.');
+                    }
+                },
+            ],
             'image' => 'nullable|image|max:2048',
         ]);
 
