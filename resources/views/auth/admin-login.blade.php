@@ -39,12 +39,6 @@
         <form method="POST" action="{{ route('admin.login.submit') }}">
             @csrf
 
-            @if ($errors->any())
-            <div class="error">
-                {{ $errors->first() }}
-            </div>
-            @endif
-
             <div class="form-group">
                 <label class="form-label">Email Address</label>
                 <input type="email" name="email" class="form-input" placeholder="admin@example.com" value="{{ old('email') }}" required>
@@ -65,4 +59,18 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show admin login errors in toastr
+    @if ($errors->any())
+        toastr.error('{{ $errors->first() }}', 'Login Error', {
+            timeOut: 6000,
+            progressBar: true
+        });
+    @endif
+});
+</script>
+@endpush
 @endsection

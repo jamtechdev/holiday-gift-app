@@ -44,15 +44,6 @@ input {
     align-items: center;
     gap: 10px;
 }
-.puzzle-form .error-message {
-    background: transparent;
-    color: #fecaca;
-    padding: 0.75rem;
-    border-radius: 4px;
-    margin-top: -12px;
-    text-align: center;
-    font-size: 0.9rem;
-}
 </style>
 <div class="login-container" style="background-image: url('{{ asset('images/login.png') }}');background-size: contain;">
     <div class="puzzle-form-container" style="background-image: url('{{ asset('images/puzzle.png') }}');">
@@ -86,17 +77,11 @@ input {
                        aria-describedby="terms-text"
                        required />
                  <span id="terms-text">
-                    I accept Graphtech’s gift terms and my organization’s policy.
+                    I accept Graphtech's gift terms and my organization's policy.
                  </span>
                </div>
                <button type="submit">Login</button>
             </div>
-            
-            @if ($errors->any())
-                <div class="error-message">
-                    {{ $errors->first() }}
-                </div>
-            @endif
         </form>
     </div>
 </div>
@@ -191,6 +176,14 @@ document.addEventListener('DOMContentLoaded', function () {
         closeModal();
         termsCheckbox.checked = true;
     });
+    
+    // Show login errors in toastr
+    @if ($errors->any())
+        toastr.error('{{ $errors->first() }}', 'Login Error', {
+            timeOut: 6000,
+            progressBar: true
+        });
+    @endif
 });
 </script>
 @endpush

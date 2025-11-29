@@ -168,6 +168,164 @@ img.overlayPuzzle {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     animation: modalSlideIn 0.3s ease-out;
 }
+
+/* Already Claimed Modal - Wider and Better UI */
+#alreadyClaimedModal .modal-content {
+    max-width: 800px;
+    width: 95%;
+    border: 3px solid #dcd08f;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(220, 208, 143, 0.3);
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+#alreadyClaimedModal .modal-header {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    padding: 25px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#alreadyClaimedModal .modal-header h2 {
+    flex: 1;
+    text-align: center;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#alreadyClaimedModal .modal-header .close {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+}
+
+#alreadyClaimedModal .modal-header .close:hover {
+    transform: rotate(90deg) scale(1.2);
+    opacity: 0.8;
+}
+
+#alreadyClaimedModal .modal-body {
+    padding: 50px 60px;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    position: relative;
+}
+
+#alreadyClaimedModal .warning-icon-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#alreadyClaimedModal .warning-icon {
+    font-size: 80px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    flex-shrink: 0;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+#alreadyClaimedModal .message-content {
+    flex: 1;
+}
+
+#alreadyClaimedModal .message-content h3 {
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#alreadyClaimedModal .message-content p {
+    color: #e0e0e0;
+    line-height: 1.9;
+    font-size: 17px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#alreadyClaimedModal .message-content a {
+    color: #0a0c3f;
+    font-weight: 700;
+    text-decoration: none;
+    background: linear-gradient(135deg, #dcd08f 0%, #f0e68c 100%);
+    padding: 4px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220, 208, 143, 0.4);
+}
+
+#alreadyClaimedModal .message-content a:hover {
+    background: linear-gradient(135deg, #f0e68c 0%, #dcd08f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 208, 143, 0.6);
+}
+
+#alreadyClaimedModal .modal-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(220, 208, 143, 0.2);
+}
+
+#alreadyClaimedModal .btn-ok {
+    min-width: 180px;
+    background: linear-gradient(135deg, #dcd08f 0%, #b8a85a 100%);
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 40px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(220, 208, 143, 0.4);
+}
+
+#alreadyClaimedModal .btn-ok:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(220, 208, 143, 0.6);
+    background: linear-gradient(135deg, #e8dc9f 0%, #c4b87a 100%);
+}
+
+#alreadyClaimedModal .btn-ok:active {
+    transform: translateY(-1px);
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@media (max-width: 768px) {
+    #alreadyClaimedModal .modal-content {
+        width: 98%;
+        max-width: 100%;
+    }
+    
+    #alreadyClaimedModal .modal-body {
+        padding: 30px 25px;
+    }
+    
+    #alreadyClaimedModal .warning-icon-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    #alreadyClaimedModal .warning-icon {
+        font-size: 60px;
+        margin: 0 auto;
+    }
+}
 @keyframes modalSlideIn {
     from {
         transform: translateY(-50px);
@@ -365,24 +523,28 @@ img.overlayPuzzle {
 
 <!-- Error Modal for Already Claimed -->
 <div id="alreadyClaimedModal" class="modal">
-    <div class="modal-content" style="border: 2px solid #dcd08f;">
-        <div class="modal-header" style="background: #dc2626; border-radius: 13px 13px 0 0;">
-            <h2 style="color: white; margin: 0; font-size: 24px; font-weight: 700; text-transform: uppercase;">Already Claimed</h2>
-            <span class="close" onclick="closeAlreadyClaimedModal()" style="color: white; font-size: 28px; font-weight: bold;">&times;</span>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Already Claimed</h2>
+            <span class="close" onclick="closeAlreadyClaimedModal()" style="color: white; font-size: 32px; font-weight: bold; cursor: pointer; transition: transform 0.2s;">&times;</span>
         </div>
-        <div class="modal-body" style="background: #2a2a2a; text-align: center; padding: 40px 30px; border-radius: 0 0 13px 13px;">
-            <div style="font-size: 64px; margin-bottom: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">⚠️</div>
-            <h3 style="color: #0a0c3f; margin-bottom: 20px; font-size: 24px; font-weight: 600; background: #ffffff; padding: 10px 20px; border-radius: 8px; display: inline-block;">Gift Already Claimed</h3>
-            <p style="color: #ffffff; line-height: 1.8; font-size: 16px; margin-bottom: 15px; text-align: center;">
-                Our records show that you've already claimed your gift for this year.
-            </p>
-            <p style="color: #ffffff; line-height: 1.8; font-size: 16px; margin-bottom: 30px; text-align: center;">
-                If this is unexpected or you have questions, please contact us at 
-                <a href="mailto:info@thinkgraphtech.com" style="color: #0a0c3f; font-weight: 600; text-decoration: underline; background: #ffffff; padding: 2px 8px; border-radius: 4px; display: inline-block;">info@thinkgraphtech.com</a> 
-                so we can assist you.
-            </p>
-            <div class="form-actions" style="justify-content: center; margin-top: 30px;">
-                <button type="button" class="btn btn-primary" onclick="closeAlreadyClaimedModal()" style="min-width: 150px; background: linear-gradient(135deg, #dcd08f 0%, #b8a85a 100%); color: #1a1a1a; font-weight: 600; padding: 12px 30px; border-radius: 8px; border: none; cursor: pointer;">OK</button>
+        <div class="modal-body">
+            <div class="warning-icon-container">
+                <div class="warning-icon">⚠️</div>
+                <div class="message-content">
+                    <h3>Gift Already Claimed</h3>
+                    <p>
+                        Our records show that you've already claimed your gift for this year.
+                    </p>
+                    <p>
+                        If this is unexpected or you have questions, please contact us at 
+                        <a href="mailto:info@thinkgraphtech.com">info@thinkgraphtech.com</a> 
+                        so we can assist you.
+                    </p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-ok" onclick="closeAlreadyClaimedModal()">OK</button>
             </div>
         </div>
     </div>
@@ -459,8 +621,10 @@ const hasClaimed = @json($hasClaimed ?? false);
 function openModal(categoryId) {
     // Check if user has already claimed
     if (hasClaimed) {
-        document.getElementById('alreadyClaimedModal').style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        toastr.error('Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.', 'Already Claimed', {
+            timeOut: 8000,
+            progressBar: true
+        });
         return;
     }
     
@@ -543,13 +707,21 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
         return response.json().then(err => Promise.reject(err));
     })
     .then(data => {
-        // Close modal
-        document.getElementById('giftDetailsModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-
-        // Redirect to next page
-        const redirectTo = form.querySelector('input[name="redirect_to"]').value;
-        window.location.href = redirectTo;
+        // Show success toastr
+        toastr.success('Gift request submitted successfully!', 'Success!', {
+            timeOut: 3000,
+            progressBar: true
+        });
+        
+        // Close modal after short delay
+        setTimeout(() => {
+            document.getElementById('giftDetailsModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Redirect to next page
+            const redirectTo = form.querySelector('input[name="redirect_to"]').value;
+            window.location.href = redirectTo;
+        }, 1500);
     })
     .catch(error => {
         // Re-enable submit button
@@ -558,13 +730,20 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
 
         // Check if it's an already claimed error
         if (error.error === 'already_claimed' || (error.message && error.message.includes('already claimed'))) {
-            // Close form modal and show already claimed modal
+            // Close form modal
             document.getElementById('giftDetailsModal').style.display = 'none';
-            document.getElementById('alreadyClaimedModal').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            
+            // Show error in toastr
+            const errorMessage = error.message || 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
+            toastr.error(errorMessage, 'Already Claimed', {
+                timeOut: 8000,
+                progressBar: true
+            });
             return;
         }
 
-        // Show error message
+        // Show error message in toastr
         let errorMessage = 'Please fill all required fields correctly.';
         if (error.errors) {
             const firstError = Object.values(error.errors)[0];
@@ -573,7 +752,10 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
             errorMessage = error.message;
         }
 
-        alert(errorMessage);
+        toastr.error(errorMessage, 'Error', {
+            timeOut: 6000,
+            progressBar: true
+        });
     });
 });
 </script>
