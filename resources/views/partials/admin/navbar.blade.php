@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
             <button type="submit" class="logout-btn">
                 <span>Logout</span>

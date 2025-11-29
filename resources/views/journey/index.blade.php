@@ -3,10 +3,6 @@
 @section('title', 'Journey Start')
 
 @section('journey-content')
-<!-- <h1 class="step-title">Welcome to Your Gift Journey!</h1>
-<p class="step-description">Let's find the perfect holiday gifts together</p>
-<div class="step-progress">Ready to start?</div>
-<a href="{{ route('journey.step', 1) }}" class="next-btn">Start Journey</a> -->
 <style>
 .video-overlay {
     width: 100%;
@@ -264,7 +260,7 @@ img.bgImage {
 </div>
 
 <div class="box animate fadeInRight four">
-  <a href="{{ route('journey.step', 1) }}" class="next-btn">
+  <a href="{{ route('user.gift.categories') }}" class="next-btn">
     <img src="{{ asset('images/02_INTRO PAGE_Gift button.png') }}" class="overlayImg" />
   </a>  
 </div>

@@ -10,39 +10,47 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserGiftRequestController;
 use Illuminate\Support\Facades\Route;
 
-// Login routes - authentication check handled in controller
+// Public authentication routes
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/', [AuthController::class, 'login']);
+Route::post('/', [AuthController::class, 'login'])->name('login.submit');
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+// User routes - prefixed with 'user' and named with 'user.*'
+Route::prefix('user')->name('user.')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/journey', [UserJourneyController::class, 'index'])->name('user.journey');
-    Route::get('/journey/step/{step}', [UserJourneyController::class, 'step'])->name('journey.step');
-    Route::post('/journey/step/{step}', [UserJourneyController::class, 'processStep']);
+        Route::get('/journey', [UserJourneyController::class, 'index'])->name('journey');
+        Route::get('/gift-categories', [UserJourneyController::class, 'giftCategories'])->name('gift.categories');
+        Route::get('/gifts/category/{category}', [UserJourneyController::class, 'showGiftsByCategory'])->name('gifts.byCategory');
+        Route::get('/claimed', [UserJourneyController::class, 'claimed'])->name('claimed');
+
+        Route::get('/gift-request', [GiftRequestController::class, 'create'])->name('gift-request.create');
+        Route::post('/gift-request', [GiftRequestController::class, 'store'])->name('gift-request.store');
+    });
 });
 
-Route::get('/gift-request', [GiftRequestController::class, 'create'])->name('gift-request.create');
-Route::post('/gift-request', [GiftRequestController::class, 'store'])->name('gift-request.store');
-Route::get('/gift-request/success', [GiftRequestController::class, 'success'])->name('gift-request.success');
-
+// Admin routes - prefixed with 'admin' and named with 'admin.*'
+// Protected by 'role:admin' middleware to prevent regular users from accessing
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Admin login routes - authentication check handled in controller
+    // Admin login routes - public, authentication check handled in controller
     Route::get('/login', [AuthController::class, 'showAdminLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'adminLogin'])->name('login.submit');
-    
-    Route::middleware('auth')->group(function () {
+
+    // Admin protected routes - require authentication and admin role
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
         Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-        
+
         Route::resource('categories', CategoryController::class);
         Route::resource('gifts', GiftController::class);
         Route::resource('users', UserController::class);
-        
+
         Route::get('/gift-requests', [UserGiftRequestController::class, 'index'])->name('gift-requests.index');
         Route::get('/gift-requests-export', [UserGiftRequestController::class, 'export'])->name('gift-requests.export');
         Route::get('/gift-requests/{userGiftRequest}', [UserGiftRequestController::class, 'show'])->name('gift-requests.show');
         Route::delete('/gift-requests/{userGiftRequest}', [UserGiftRequestController::class, 'destroy'])->name('gift-requests.destroy');
-        
+
         Route::get('/users-export', [UserController::class, 'export'])->name('users.export');
         Route::post('/users-import', [UserController::class, 'importStore'])->name('users.import.store');
     });

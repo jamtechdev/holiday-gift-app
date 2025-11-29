@@ -11,6 +11,7 @@ class UserGiftRequest extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'category_id',
         'name',
         'street_address',
@@ -25,5 +26,10 @@ class UserGiftRequest extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
