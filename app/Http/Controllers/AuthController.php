@@ -62,10 +62,11 @@ class AuthController extends Controller
             }
 
             $request->session()->regenerate();
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Welcome back, Admin!');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        return back()->withErrors(['email' => 'Invalid credentials. Please check your email and password.']);
     }
 
     public function login(Request $request): RedirectResponse
@@ -88,11 +89,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return $this->redirectFor($request->user());
+            return $this->redirectFor($request->user())
+                ->with('success', 'Welcome back! You have successfully logged in.');
         }
 
         return back()->withErrors([
-            'email' => 'Invalid credentials. Please try again.',
+            'email' => 'Invalid credentials. Please check your email and password.',
         ])->onlyInput('email');
     }
 

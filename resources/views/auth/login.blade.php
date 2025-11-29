@@ -176,14 +176,6 @@ document.addEventListener('DOMContentLoaded', function () {
         closeModal();
         termsCheckbox.checked = true;
     });
-    
-    // Show login errors in toastr
-    @if ($errors->any())
-        toastr.error('{{ $errors->first() }}', 'Login Error', {
-            timeOut: 6000,
-            progressBar: true
-        });
-    @endif
 });
 </script>
 @endpush

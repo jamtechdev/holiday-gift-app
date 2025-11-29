@@ -60,17 +60,4 @@
     </div>
 </div>
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Show admin login errors in toastr
-    @if ($errors->any())
-        toastr.error('{{ $errors->first() }}', 'Login Error', {
-            timeOut: 6000,
-            progressBar: true
-        });
-    @endif
-});
-</script>
-@endpush
 @endsection

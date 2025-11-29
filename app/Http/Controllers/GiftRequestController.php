@@ -39,17 +39,19 @@ class GiftRequestController extends Controller
             ->first();
 
         if ($existingClaim) {
+            $errorMessage = 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
+            
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
                     'success' => false,
                     'error' => 'already_claimed',
-                    'message' => 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.'
+                    'message' => $errorMessage
                 ], 422);
             }
 
             return back()->withErrors([
-                'category_id' => 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.'
-            ]);
+                'category_id' => $errorMessage
+            ])->with('error', $errorMessage);
         }
 
         // Create the gift request with user_id
@@ -66,19 +68,23 @@ class GiftRequestController extends Controller
             'company' => $request->company,
         ]);
 
+        $successMessage = 'Gift request submitted successfully! Your gift will be processed soon.';
+
         // If AJAX request, return JSON response
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Gift request submitted successfully!'
+                'message' => $successMessage
             ]);
         }
 
         // Otherwise redirect
         if ($request->has('redirect_to')) {
-            return redirect($request->redirect_to);
+            return redirect($request->redirect_to)
+                ->with('success', $successMessage);
         }
 
-        return redirect()->route('user.claimed');
+        return redirect()->route('user.claimed')
+            ->with('success', $successMessage);
     }
 }

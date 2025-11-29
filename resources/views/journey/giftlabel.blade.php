@@ -81,7 +81,7 @@ img.overlayPuzzle {
 
         <div class="boxes">
             @foreach($categories as $category)
-                <a href="{{ route('user.gifts.byCategory', $category) }}">
+                <a href="{{ route('user.gifts.byCategory', $category) }}" class="category-link" data-category="{{ $category->name }}">
                     <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="category-image" />
                     <span class="category-name">{{ $category->name }}</span>
                 </a>
@@ -89,6 +89,21 @@ img.overlayPuzzle {
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryLinks = document.querySelectorAll('.category-link');
+    
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const categoryName = this.getAttribute('data-category');
+            if (typeof toastr !== 'undefined') {
+                toastr.success('Loading ' + categoryName + ' gifts...');
+            }
+        });
+    });
+});
+</script>
 
 @endsection
 

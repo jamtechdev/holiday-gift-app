@@ -708,10 +708,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
     })
     .then(data => {
         // Show success toastr
-        toastr.success('Gift request submitted successfully!', 'Success!', {
-            timeOut: 3000,
-            progressBar: true
-        });
+        toastr.success(data.message || 'Gift request submitted successfully! Your gift will be processed soon.');
         
         // Close modal after short delay
         setTimeout(() => {
@@ -736,10 +733,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
             
             // Show error in toastr
             const errorMessage = error.message || 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
-            toastr.error(errorMessage, 'Already Claimed', {
-                timeOut: 8000,
-                progressBar: true
-            });
+            toastr.error(errorMessage);
             return;
         }
 
@@ -752,10 +746,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
             errorMessage = error.message;
         }
 
-        toastr.error(errorMessage, 'Error', {
-            timeOut: 6000,
-            progressBar: true
-        });
+        toastr.error(errorMessage);
     });
 });
 </script>
