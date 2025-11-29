@@ -526,6 +526,8 @@ img.back:hover {
                     <a href="https://www.wildheartministries.net/">
                         <img src="{{ asset('images/location.png') }}" />
                     </a>
+                @else
+                    <a href="#"></a>
                 @endif
                 <a href="{{ route('user.gift.categories') }}">
                     <img src="{{ asset('images/back.png') }}" class="back" />

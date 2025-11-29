@@ -206,6 +206,17 @@ img.overlayPuzzle {
     left: auto;
     right: 53px;
 }
+.backBtn a img {
+    margin: auto;
+    max-width: 160px;
+}
+.backBtn {
+    margin-top: 134px;
+}
+.backBtn a {
+    flex: 1;
+    text-align: center;
+}
 </style>
 
 <div class="gift-container" style="background-image: url('{{ asset('images/center.png') }}');">
@@ -228,6 +239,12 @@ img.overlayPuzzle {
                   </div>  
                 </a>
             @endforeach
+        </div>
+
+        <div class="backBtn">
+            <a href="{{ route('user.journey') }}">
+                <img src="{{ asset('images/back.png') }}" />
+            </a>
         </div>
         
     </div>
