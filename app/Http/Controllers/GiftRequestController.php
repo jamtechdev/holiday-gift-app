@@ -20,6 +20,7 @@ class GiftRequestController extends Controller
             'telephone' => 'required|string|min:10|max:15',
             'email' => 'required|email|max:255',
             'company' => 'nullable|string|max:255',
+            'charity_selection' => 'nullable|string|in:wildheart,lionheart,split',
         ]);
 
         $user = Auth::user();
@@ -51,6 +52,7 @@ class GiftRequestController extends Controller
             'telephone' => $request->telephone,
             'email' => $request->email,
             'company' => $request->company,
+            'charity_selection' => $request->charity_selection,
         ]);
 
         return response()->json([

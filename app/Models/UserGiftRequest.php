@@ -21,6 +21,7 @@ class UserGiftRequest extends Model
         'telephone',
         'email',
         'company',
+        'charity_selection',
     ];
 
     public function category(): BelongsTo

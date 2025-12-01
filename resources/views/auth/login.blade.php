@@ -98,6 +98,14 @@ input {
     margin-top: 16px;
 
 }
+.btnLogin:hover{
+
+box-shadow: 0 6px 20px rgba(10, 12, 63, 0.4);
+background: linear-gradient(135deg, #3f6d86 0%, #73a1aa 100%);
+border-color: #3f6d86;
+cursor: pointer;
+
+}
 </style>
 <div class="login-container logBgImg" style="">
     <div class="puzzle-form-container">

@@ -336,9 +336,41 @@ a.category-link.shape-3 span {
     left: unset !important;
 }
 }
+
+    form[action*="logout"] {
+        position: fixed;
+        top: 15px;
+        right: 50px;
+        z-index: 9999;
+        display: inline-block;
+    }
+    button.logout {
+        height: 42px;
+        background: #ffff;
+        width: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: #e16539;
+        padding: 10px;
+        border: 1px solid #e16539;
+        cursor: pointer;
+    }
+    button.logout:hover {
+        background: #e16539;
+        color: #fff;
+        cursor: pointer;
+    }
 </style>
 
 <div class="gift-container">
+    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="logout">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+        </button>
+    </form>
     <img src="{{ asset('images/overlayPuzzle.png') }}" class="overlayPuzzle" />
 
     <div class="giftBox">

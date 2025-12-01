@@ -511,6 +511,122 @@ img.giftbox {
     border-radius: 30px;
 }
 
+/* Logout Button Styles */
+form[action*="logout"] {
+    position: fixed;
+    top: 15px;
+    right: 50px;
+    z-index: 9999;
+    display: inline-block;
+}
+button.logout {
+    height: 42px;
+    background: #ffff;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #e16539;
+    padding: 10px;
+    border: 1px solid #e16539;
+    cursor: pointer;
+}
+button.logout:hover {
+    background: #e16539;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Charity Selection Styles */
+.backBtn .charity-selection-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.charity-options {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.charity-logo-link {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+.charity-logo-link:hover {
+    transform: scale(1.1);
+}
+.charity-logo {
+    max-width: 120px;
+    height: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+}
+.lion-charity-logo {
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3));
+}
+.charity-selection-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 8px;
+    border: 1px solid #dcd08f;
+}
+.charity-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.charity-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #dcd08f;
+    cursor: pointer;
+}
+.charity-radio-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.charity-radio-option label {
+    cursor: pointer;
+    font-size: 14px;
+}
+@media screen and (max-width: 667.99px) {
+    .backBtn .charity-selection-container {
+        flex: 1;
+        min-width: 0;
+    }
+    .charity-options {
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .charity-logo,
+    .lion-charity-logo {
+        max-width: 80px;
+    }
+    .lion-charity-logo {
+        padding: 4px;
+        border-radius: 4px;
+    }
+}
+
 /* Swiper Styles */
 .gift-swiper {
     width: 100%;
@@ -540,7 +656,13 @@ img.giftbox {
 </style>
 
 <div class="gift-container" >
-    <div class="giftBox">   
+    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="logout">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+        </button>
+    </form>
+    <div class="giftBox">
 
         <div class="logoBox">
            <img src="{{ asset('images/logo-golden.png') }}" class="logo" />
@@ -598,13 +720,13 @@ img.giftbox {
                             <img src="{{ asset('images/'.$giftBoxImage) }}" class="giftbox" alt="{{ $gift->name }}"/>
                         @endif
                     </a>
-                    <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }});" style="cursor: pointer;">
+                    <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
                         <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
                         <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
                         <span class="price"><sup>€</sup>20</span>
                     </a>
                    <div>
-                    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+                    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
                    </div>
                 </div>
             @endforeach
@@ -613,13 +735,13 @@ img.giftbox {
                 <a href="#">
                     <img src="{{ asset('images/giftbox.png') }}" class="giftbox"/>
                 </a>
-                <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }});" style="cursor: pointer;">
+                <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
                     <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
                     <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
                     <span class="price"><sup>€</sup>20</span>
                 </a>
 <div>
-    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
 
 </div>
             </div>
@@ -627,9 +749,16 @@ img.giftbox {
 
             <div class="backBtn">
                 @if (strtolower($category->name ?? '') === 'donation')
-                    <a href="https://www.wildheartministries.net/">
-                        <img src="{{ asset('images/location.png') }}" />
-                    </a>
+                    <div class="charity-selection-container">
+                        <div class="charity-options">
+                            <a href="https://www.wildheartministries.net/" target="_blank" class="charity-logo-link" title="Visit Wild Heart Ministries">
+                                <img src="{{ asset('images/location.png') }}" alt="Wild Heart Ministries" class="charity-logo" />
+                            </a>
+                            <a href="https://www.themicahparsons.com/givingback" target="_blank" class="charity-logo-link" title="Visit Lion Heart Foundation">
+                                <img src="{{ asset('images/lionlogo.webp') }}" alt="Lion Heart Foundation" class="lion-charity-logo" />
+                            </a>
+                        </div>
+                    </div>
                 @else
                     <a href="#"></a>
                 @endif
@@ -727,6 +856,30 @@ img.giftbox {
                     <input type="text" id="company" name="company" placeholder="Enter company name">
                 </div>
 
+                <div class="form-group" id="charity-selection-group" style="display: none;">
+                    <label>Charity Selection *</label>
+                    <div class="charity-selection-options">
+                        <div class="charity-radio-group">
+                            <div class="charity-radio-option">
+                                <input type="radio" id="charity_wildheart" name="charity_selection" value="wildheart" required>
+                                <label for="charity_wildheart">Wild Heart Ministries (100%)</label>
+                            </div>
+                            <div class="charity-radio-option">
+                                <input type="radio" id="charity_lionheart" name="charity_selection" value="lionheart">
+                                <label for="charity_lionheart">Lion Heart Foundation (100%)</label>
+                            </div>
+                            <div class="charity-radio-option">
+                                <input type="radio" id="charity_split" name="charity_selection" value="split">
+                                <label for="charity_split">Split 50% / 50%</label>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px; font-size: 12px; color: #999;">
+                            <a href="https://www.wildheartministries.net/" target="_blank" style="color: #dcd08f; text-decoration: none;">Visit Wild Heart Ministries</a> |
+                            <a href="https://www.themicahparsons.com/givingback" target="_blank" style="color: #dcd08f; text-decoration: none;">Visit Lion Heart Foundation</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModalWithConfirm()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit & Continue</button>
@@ -740,7 +893,7 @@ img.giftbox {
 // Check if user has already claimed for this category
 const hasClaimed = @json($hasClaimed ?? false);
 
-function openModal(categoryId) {
+function openModal(categoryId, categoryName = '') {
     if (hasClaimed) {
         toastr.error('Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.', 'Already Claimed', {
             timeOut: 8000,
@@ -750,6 +903,22 @@ function openModal(categoryId) {
     }
 
     document.getElementById('category_id').value = categoryId;
+
+    // Show/hide charity selection field for donation category
+    const charitySelectionGroup = document.getElementById('charity-selection-group');
+    const charitySelectionInputs = charitySelectionGroup.querySelectorAll('input[type="radio"]');
+
+    if (categoryName && categoryName.toLowerCase() === 'donation') {
+        charitySelectionGroup.style.display = 'block';
+        charitySelectionInputs.forEach(input => input.setAttribute('required', 'required'));
+    } else {
+        charitySelectionGroup.style.display = 'none';
+        charitySelectionInputs.forEach(input => {
+            input.removeAttribute('required');
+            input.checked = false;
+        });
+    }
+
     document.getElementById('giftDetailsModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -857,7 +1026,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 100);
     }
-    
+
     function initializeSwipers() {
         const swipers = document.querySelectorAll('.gift-swiper');
         swipers.forEach(function(swiperEl) {
