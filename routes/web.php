@@ -24,7 +24,6 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('/gifts/category/{category}', [UserJourneyController::class, 'showGiftsByCategory'])->name('gifts.byCategory');
         Route::get('/claimed', [UserJourneyController::class, 'claimed'])->name('claimed');
 
-        Route::get('/gift-request', [GiftRequestController::class, 'create'])->name('gift-request.create');
         Route::post('/gift-request', [GiftRequestController::class, 'store'])->name('gift-request.store');
     });
 });

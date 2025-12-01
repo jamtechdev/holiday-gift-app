@@ -458,8 +458,6 @@ img.back:hover {
 </style>
 
 <div class="gift-container" style="background-image: url('{{ asset('images/SelectionBg.jpg') }}');">
-    <!-- <img src="{{ asset('images/overlayPuzzle.png') }}" class="overlayPuzzle" /> -->
-
     <div class="giftBox">
 
         <div class="logoBox">
@@ -637,7 +635,6 @@ img.back:hover {
 const hasClaimed = @json($hasClaimed ?? false);
 
 function openModal(categoryId) {
-    // Check if user has already claimed
     if (hasClaimed) {
         toastr.error('Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.', 'Already Claimed', {
             timeOut: 8000,
@@ -654,7 +651,6 @@ function openModal(categoryId) {
 function closeModal() {
     document.getElementById('giftDetailsModal').style.display = 'none';
     document.body.style.overflow = 'auto';
-    // Don't reset form if user wants to continue editing
 }
 
 function closeModalWithConfirm() {

@@ -6,16 +6,12 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
     public function showLogin(): View|RedirectResponse
     {
-        // If user is already authenticated, redirect them to their appropriate page
         if (Auth::check()) {
             return $this->redirectFor(Auth::user());
         }
@@ -25,7 +21,6 @@ class AuthController extends Controller
 
     public function showAdminLogin(): View|RedirectResponse
     {
-        // If user is already authenticated, redirect them to their appropriate page
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isAdmin()) {
@@ -39,7 +34,6 @@ class AuthController extends Controller
 
     public function adminLogin(Request $request): RedirectResponse
     {
-        // If already authenticated, redirect to appropriate page
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isAdmin()) {
@@ -71,7 +65,6 @@ class AuthController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
-        // If already authenticated, redirect to appropriate page
         if (Auth::check()) {
             return $this->redirectFor(Auth::user());
         }

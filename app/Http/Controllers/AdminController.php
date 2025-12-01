@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Gift;
+use App\Models\User;
 use App\Models\UserGiftRequest;
 use Illuminate\View\View;
 
@@ -14,11 +15,10 @@ class AdminController extends Controller
         $categories = Category::with('gifts')->latest()->get();
         $gifts = Gift::with('category')->latest()->get();
 
-        // Statistics for dashboard - exclude admin users
-        $totalUsers = \App\Models\User::where('role', '!=', 'admin')->count();
+        $totalUsers = User::where('role', '!=', 'admin')->count();
         $todayGifts = Gift::whereDate('created_at', today())->count();
         $recentGifts = Gift::with('category')->latest()->take(10)->get();
-        $recentUsers = \App\Models\User::where('role', '!=', 'admin')->latest()->take(10)->get();
+        $recentUsers = User::where('role', '!=', 'admin')->latest()->take(10)->get();
         $recentRequests = UserGiftRequest::with('category')->latest()->take(10)->get();
 
         $stats = [

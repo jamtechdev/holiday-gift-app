@@ -239,11 +239,9 @@ img.bgImage {
 @keyframes run-left-to-right {
   0% {
     left: -1145px;
-    /* transform: translateX(0); /* Alternative using transform */ */
   }
   100% {
-    left: calc(100% - 50px); /* Moves to the right edge, accounting for element width */
-    /* transform: translateX(calc(100vw - 50px)); /* Alternative using transform and viewport width */ */
+    left: calc(100% - 50px);
   }
 }
 /* 2. Apply the Animation to an Element */

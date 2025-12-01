@@ -212,8 +212,6 @@ img.overlayPuzzle {
 </style>
 
 <div class="gift-container" style="background-image: url('{{ asset('images/endBg.jpg') }}');">
-    <!-- <img src="{{ asset('images/overlayPuzzle.png') }}" class="overlayPuzzle" /> -->
-
     <div class="giftBox">
 
         <div class="logoBox">

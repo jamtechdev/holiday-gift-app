@@ -35,7 +35,6 @@ class UserJourneyController extends Controller
         $category->load('gifts');
         $user = Auth::user();
 
-        // Check if user has already claimed a gift for this category this year
         $hasClaimed = UserGiftRequest::where('user_id', $user->id)
             ->where('category_id', $category->id)
             ->whereYear('created_at', now()->year)

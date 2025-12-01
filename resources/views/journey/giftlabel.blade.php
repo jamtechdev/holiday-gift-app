@@ -96,8 +96,6 @@ img.overlayPuzzle {
   height: 100%;
   object-fit: cover;
   display: block;
-  /* Crucial: Hides the back of the image during the 3D flip */
-  /* backface-visibility: hidden; */
 }
 
 /* 4. Keyframes for the combined animation */
@@ -123,7 +121,6 @@ img.overlayPuzzle {
 
 .shine {
   position: relative;
-  /* overflow: hidden; */
 }
 .shine::before {
   background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 100%);
