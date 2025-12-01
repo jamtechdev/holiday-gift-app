@@ -11,19 +11,19 @@
     @include('partials.toastr')
 </head>
 <body>
-    @include('partials.loader')
+    {{-- @include('partials.loader') --}}
     @yield('content')
 
     @stack('scripts')
-    
-    <script>
+
+    {{-- <script>
         // Clear visited routes when user logs out
         document.addEventListener('DOMContentLoaded', function() {
             // Clear sessionStorage if user is on login page (after logout)
             if (window.location.pathname === '/' || window.location.pathname === '/admin/login') {
                 sessionStorage.removeItem('holiday_app_visited_routes');
             }
-            
+
             // Clear sessionStorage when logout form is submitted
             const logoutForms = document.querySelectorAll('form[action*="logout"]');
             logoutForms.forEach(form => {
@@ -32,6 +32,6 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 </body>
 </html>

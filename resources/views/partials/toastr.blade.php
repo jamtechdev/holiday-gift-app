@@ -249,14 +249,14 @@
             };
 
             // Wait for loader to finish before showing toasts (minimum 2 seconds)
-            const loaderDelay = 2000;
-            const startTime = Date.now();
+            // const loaderDelay = 2000;
+            // const startTime = Date.now();
 
             const showToasts = () => {
-                const elapsed = Date.now() - startTime;
-                const remaining = Math.max(0, loaderDelay - elapsed);
+                // const elapsed = Date.now() - startTime;
+                // const remaining = Math.max(0, loaderDelay - elapsed);
                 
-                setTimeout(() => {
+                // setTimeout(() => {
                     // Show toast for session flash messages
                     @if(session('success'))
                         toastr.success("{{ session('success') }}");
@@ -275,7 +275,7 @@
                             toastr.error("{{ $error }}");
                         @endforeach
                     @endif
-                }, remaining);
+                // }, remaining);
             };
 
             // Wait for page load and minimum delay
@@ -284,7 +284,7 @@
             } else {
                 window.addEventListener('load', showToasts);
                 // Fallback
-                setTimeout(showToasts, loaderDelay);
+                // setTimeout(showToasts, loaderDelay);
             }
 
             // Use MutationObserver to convert emails to links when toast appears
