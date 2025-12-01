@@ -1,6 +1,6 @@
 @extends('layouts.journey')
 
-@section('title', 'Claimed')
+@section('title', 'Already Claimed')
 
 @section('journey-content')
 
@@ -106,6 +106,23 @@ img.overlayPuzzle {
 .boxes p {
     color: #0a0c3f;
     font-size: 20px;
+}
+.boxes p a {
+    color: #0a0c3f;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    border-bottom: 2px solid rgba(220, 208, 143, 0.6);
+    padding-bottom: 2px;
+}
+.boxes p a:hover {
+    color: #0a0c3f;
+    border-bottom-color: #dcd08f;
+    border-bottom-width: 3px;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(220, 208, 143, 0.3);
 }
 .boxes h2 {
     font-size: 28px;
@@ -263,6 +280,23 @@ img.overlayPuzzle {
     font-size: 12px;
     line-height: normal;
 }
+.boxes p a {
+    color: #0a0c3f;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    border-bottom: 2px solid rgba(220, 208, 143, 0.6);
+    padding-bottom: 2px;
+}
+.boxes p a:hover {
+    color: #0a0c3f;
+    border-bottom-color: #dcd08f;
+    border-bottom-width: 3px;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(220, 208, 143, 0.3);
+}
 .logout-container {
     margin-top: 20px;
     gap: 10px;
@@ -323,15 +357,11 @@ img.overlayPuzzle {
                 <img src="{{ $displayImage }}" class="selectedGift" alt="{{ $displayCategoryName }}" />
             </a>
             <div>
-                <h5>You have chosen {{ strtolower($displayCategoryName) }}.</h5>
-                <h2>Your gift is on the<br> way to you.</h2>
-                <p>Thank you for visiting the<br> Graphtech Holiday Store!<br> We hope you enjoy your gift and we<br> wish you a joyful holiday season<br> and a prosperous New Year</p>
+                <h5>You have already claimed {{ strtolower($displayCategoryName) }}.</h5>
+                <h2>Gift Already Claimed</h2>
+                <p>Our records show that you've already claimed your gift for this year. If this is unexpected or you have any questions, please contact us at <a href="mailto:info@thinkgraphtech.com?subject=Gift Claim Inquiry&body=Hello,%0D%0A%0D%0AI have a question about my gift claim.">info@thinkgraphtech.com</a>, and we will assist you.</p>
 
                 <div class="logout-container">
-                    <a href="{{ route('user.gift.categories') }}" class="claim-again-btn">
-                        <span class="claim-again-icon">🎁</span>
-                        <span>Claim Again</span>
-                    </a>
                     <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
                         @csrf
                         <button type="submit" class="logout-btn">
@@ -348,15 +378,11 @@ img.overlayPuzzle {
                 <img src="{{ asset('images/gift1.png') }}" class="selectedGift" alt="Gift" />
             </a>
             <div>
-                <h5>You have chosen your gift.</h5>
-                <h2>Your gift is on the<br> way to you.</h2>
-                <p>Thank you for visiting the<br> Graphtech Holiday Store!<br> We hope you enjoy your gift and we<br> wish you a joyful holiday season<br> and a prosperous New Year</p>
+                <h5>You have already claimed your gift.</h5>
+                <h2>Gift Already Claimed</h2>
+                <p>Our records show that you've already claimed your gift for this year. If this is unexpected or you have any questions, please contact us at <a href="mailto:info@thinkgraphtech.com?subject=Gift Claim Inquiry&body=Hello,%0D%0A%0D%0AI have a question about my gift claim.">info@thinkgraphtech.com</a>, and we will assist you.</p>
 
                 <div class="logout-container">
-                    <a href="{{ route('user.gift.categories') }}" class="claim-again-btn">
-                        <span class="claim-again-icon">🎁</span>
-                        <span>Claim Again</span>
-                    </a>
                     <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
                         @csrf
                         <button type="submit" class="logout-btn">

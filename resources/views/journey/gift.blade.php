@@ -455,10 +455,61 @@ img.back:hover {
 .boxes a, .boxes button {
     flex: 1;
 }
+
+@media screen and (min-width:668px) {
+   .gift-container{
+    background-image: url('{{ asset('images/SelectionBg.jpg') }}');
+   }
+   .boxes {
+
+    align-items: center;
+}
+}
+@media screen and (max-width:667.99px) {
+    .gift-container{
+    background-image: url('{{ asset('images/message-bg-mobile.png') }}');
+    background-size: 100% 100%;
+    background-position: center !important;
+   }
+   .logoBox{
+    display:none;
+   }
+   .backBtn {
+    position: fixed;
+    bottom: 11px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.boxes {
+    gap: 15px;
+    flex-direction: column;
+    justify-content: center;
+    margin:auto !important;
+    height: 87vh;
+    align-items: center;
+}
+img.giftbox {
+    width: 100%;
+    max-width: 150px;
+}
+.boxes a, .boxes button{
+    flex: unset !important;
+}
+.form-actions {
+    flex-direction: column;
+}
+}
+
+.claim-btn {
+    border: 1px solid #dcd08f !important;
+    padding: 7px 14px;
+    border-radius: 30px;
+}
 </style>
 
-<div class="gift-container" style="background-image: url('{{ asset('images/SelectionBg.jpg') }}');">
-    <div class="giftBox">
+<div class="gift-container" >
+    <div class="giftBox">   
 
         <div class="logoBox">
            <img src="{{ asset('images/logo-golden.png') }}" class="logo" />
@@ -502,7 +553,9 @@ img.back:hover {
                         <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
                         <span class="price"><sup>€</sup>20</span>
                     </a>
-                    <button type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+                   <div>
+                    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+                   </div>
                 </div>
             @endforeach
         @else
@@ -515,7 +568,10 @@ img.back:hover {
                     <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
                     <span class="price"><sup>€</sup>20</span>
                 </a>
-                <button type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+<div>
+    <button class="claim-btn" type="button" onclick="openModal({{ $category->id }})" style="cursor: pointer;">Claim</button>
+
+</div>
             </div>
         @endif
 
@@ -531,7 +587,7 @@ img.back:hover {
                     <img src="{{ asset('images/back.png') }}" class="back" />
                 </a>
                 <a href="#">
- 
+
                 </a>
             </div>
     </div>

@@ -271,23 +271,64 @@ img.bgImage {
     }
   }
 }
-</style>    
+@media screen and (min-width:668px) {
+   .hidedDesktop{
+    display:none;
+   }
+}
+@media screen and (max-width:667.99px) {
+    .box img{
+        width: 100%;
+        max-width: 200px;
+        margin: auto
+    }
+    .hidedMobile{
+        display:none;
+    }
+    @keyframes slideAndChange {
+    0% {
+      transform: translateX(-667px);
+    }
+    100% {
+      transform: translateX(0px); /* Move 300px to the right */
+    }
+  }
+  .topLogo{
+
+    max-width: 160px !important;
+
+}
+}
+.topLogo{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30px;
+    width: 100%;
+    max-width: 220px;
+    margin: auto;
+    z-index: 999;
+    filter: drop-shadow(2px 4px 6px black);
+}
+</style>
 
 <div class="video-overlay">
 <!-- <video controls width="100%" height="100%" autoplay controls="false">
     <source src="'{{ asset('images/02_INTRO PAGE.mp4') }}" type="video/mp4">
     <source src="{{ asset('images/02_INTRO PAGE.webm') }}" type="video/webm">
 </video>   -->
+<img src="{{ asset('images/logo-1.png') }}" class="topLogo" />
 <img src="{{ asset('images/landing.png') }}" class="bgImage" />
 
 <div class="box animate fadeInUp three">
-    <img src="{{ asset('images/welcome.png') }}" class="overlayImg" />
+    <img src="{{ asset('images/welcome.png') }}" class="overlayImg" id="welcomeImg" />
 </div>
 
 <div class="box animate fadeInRight four">
   <a href="{{ route('user.gift.categories') }}" class="next-btn">
-    <img src="{{ asset('images/02_INTRO PAGE_Gift button.png') }}" class="overlayImg" />
-  </a>  
+    <img src="{{ asset('images/02_INTRO PAGE_Gift button.png') }}" class="overlayImg hidedMobile" />
+    <img src="{{ asset('images/store-mobile.png') }}" class="overlayImg hidedDesktop" />
+  </a>
 </div>
 
 <!-- <div class="box animate fadeInUp one">
@@ -298,8 +339,20 @@ img.bgImage {
     <img src="{{ asset('images/puzzle2.png') }}" class="overlayImg" />
 </div> -->
 
-<img src="{{ asset('images/train.png') }}" class="runner animated-box" />
-
+<img  src="{{ asset('images/train.png') }}" class="runner animated-box hidedMobile" />
+<img src="{{ asset('images/train-mobile.png') }}" class="runner animated-box hidedDesktop" />
 
 </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const welcomeImg = document.getElementById('welcomeImg');
+        // Hide image after 3 seconds
+        setTimeout(function() {
+            if (welcomeImg) {
+                welcomeImg.style.opacity = '0';
+            }
+        }, 5000);
+    });
+</script>

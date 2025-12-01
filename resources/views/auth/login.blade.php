@@ -27,11 +27,11 @@ input {
 .remember_me {
     font-size: 18px;
     color: #fff;
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
     gap: 10px;
     font-family: cursive;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 .remember_me input {
     width: 24px;
@@ -44,27 +44,81 @@ input {
     align-items: center;
     gap: 10px;
 }
+
+@media screen and (min-width:668px) {
+    .logBgImg {
+        background-image: url('{{ asset('images/login.png') }}');
+        background-size: contain;
+    }
+    .puzzle-form-container {
+        background-image: url('{{ asset('images/puzzle.png') }}');
+        background-size: contain;
+    }
+}
+
+@media screen and (max-width:667.99px) {
+    .logBgImg {
+        background-image: url('{{ asset('images/loginbg-mobile.png') }}');background-size: cover;
+    }
+    .puzzle-form-container {
+        background-image: url('{{ asset('images/fieldbg-mobile.png') }}');
+        background-size: contain;
+        max-width: 100%;
+        width: 100%;
+        position: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: unset;
+        background-size: 100% 100%;
+        min-height: auto;
+        padding: 30px 16px;
+        margin-bottom: -60px;
+
+    }
+    .login-container{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .puzzle-form {
+        padding: 0;
+    }
+    .puzzle-form .form-input{
+        paddng-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.btnLogin{
+
+    padding: 10px 14px;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 16px;
+
+}
 </style>
-<div class="login-container" style="background-image: url('{{ asset('images/login.png') }}');background-size: contain;">
-    <div class="puzzle-form-container" style="background-image: url('{{ asset('images/puzzle.png') }}');">
+<div class="login-container logBgImg" style="">
+    <div class="puzzle-form-container">
         <form method="POST" action="/" class="puzzle-form">
             @csrf
-            
+
             <div class="form-group">
-                <input type="email" 
-                       name="email" 
-                       class="form-input" 
-                       placeholder="USERNAME" 
-                       value="{{ old('email') }}" 
+                <input type="email"
+                       name="email"
+                       class="form-input"
+                       placeholder="USERNAME"
+                       value="{{ old('email') }}"
                        required />
             </div>
 
-            
+
             <div class="form-group">
-                <input type="password" 
-                       name="password" 
-                       class="form-input" 
-                       placeholder="PASSWORD" 
+                <input type="password"
+                       name="password"
+                       class="form-input"
+                       placeholder="PASSWORD"
                        required />
             </div>
 
@@ -80,7 +134,7 @@ input {
                     I accept Graphtech's gift terms and my organization's policy.
                  </span>
                </div>
-               <button type="submit">Login</button>
+               <button type="submit" class="btnLogin">Login</button>
             </div>
         </form>
     </div>

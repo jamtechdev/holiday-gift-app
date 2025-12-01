@@ -214,9 +214,131 @@ img.overlayPuzzle {
     flex: 1;
     text-align: center;
 }
+
+
+@media screen and (min-width:668px) {
+   .gift-container{
+    background-image: url('{{ asset('images/center.png') }}');
+   }
+}
+@media screen and (max-width:667.99px) {
+    .gift-container{
+    background-image: url('{{ asset('images/message-bg-mobile.png') }}');
+    background-size: 100% 100%;
+    background-position: center !important;
+   }
+   .overlayPuzzle, .logoBox{
+    display:none;
+   }
+   .boxes a{
+    width: auto;
+   height: auto;
+   display: inline-block
+   }
+   .giftBox {
+
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 375px;
+    margin: auto;
+
+}
+.giftBox > div{
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+.flip-container {
+    width: 170px;
+    height: 170px;
+
+}
+.backBtn {
+    position: fixed;
+    bottom: 11px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+.backBtn a img {
+    max-width: 100px;
+}
+.flip-container span {
+    font-size: 14px !important;
+    white-space: nowrap;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
+
+.boxes{
+    justify-content: unset
+}
+/* .boxes a:last-child{
+    left: 14%
+} */
+
+a.category-link.shape-1 {
+        position: absolute;
+        top: 20%;
+        left: 20%;
+    }
+a.category-link.shape-3 {
+    position: absolute;
+    right: 0;
+    top: 40%;
+}
+a.category-link.shape-2 {
+    position: absolute;
+    left: 20px;
+    top: 51%;
+}
+.Donation {
+    max-width: 25px;
+
+}
+
+.category-link.shape-1 .Donation{
+    transform: scaleX(-1);
+    left: unset;
+        right: 24px;
+        top: -45px;
+    }
+    .category-link.shape-1 .category-name{
+        top: -65px !important;
+        left: unset !important;
+        bottom: unset !important;
+    }
+    a.category-link.shape-2 img.Donation {
+        bottom: unset !important;
+        top: -42px !important;
+        transform: scale(1, 1) !important;
+        left: 32px !important;
+}
+.category-link.shape-2 span {
+    bottom: unset !important;
+        top: -63px !important;
+        left: 27px !important;
+        right: unset !important;
+}
+.category-link.shape-3 img.Donation {
+    top: unset !important;
+    transform: scale(-1, -1) !important;
+    right: 24px !important;
+    bottom: -47px;
+}
+a.category-link.shape-3 span {
+    top: unset !important;
+    bottom: -70px;
+    left: unset !important;
+}
+}
 </style>
 
-<div class="gift-container" style="background-image: url('{{ asset('images/center.png') }}');">
+<div class="gift-container">
     <img src="{{ asset('images/overlayPuzzle.png') }}" class="overlayPuzzle" />
 
     <div class="giftBox">
@@ -225,15 +347,15 @@ img.overlayPuzzle {
         </div>
 
         <div class="boxes">
-            @foreach($categories as $category)
-                <a href="{{ route('user.gifts.byCategory', $category) }}" class="category-link" data-category="{{ $category->name }}">
+            @foreach($categories as $key => $category)
+                <a href="{{ route('user.gifts.byCategory', $category) }}" class="category-link shape-{{  $key+1 }}" data-category="{{ $category->name }}">
                   <div class="flip-container">
-                    <div class="flipper">   
+                    <div class="flipper">
                         <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="category-image" />
                         <span class="category-name">{{ $category->name }}</span>
-                        <img src="{{ asset('images/arrow.png') }}" class="Donation" /> 
+                        <img src="{{ asset('images/arrow.png') }}" class="Donation" />
                     </div>
-                  </div>  
+                  </div>
                 </a>
             @endforeach
         </div>
@@ -243,14 +365,14 @@ img.overlayPuzzle {
                 <img src="{{ asset('images/back.png') }}" />
             </a>
         </div>
-        
+
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const categoryLinks = document.querySelectorAll('.category-link');
-    
+
     categoryLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const categoryName = this.getAttribute('data-category');

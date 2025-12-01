@@ -25,13 +25,13 @@ class GiftRequestController extends Controller
         $user = Auth::user();
         $categoryId = $request->category_id;
 
-        $existingClaim = UserGiftRequest::where('user_id', $user->id)
-            ->where('category_id', $categoryId)
+        // Check if user has already claimed ANY gift this year
+        $hasClaimedAny = UserGiftRequest::where('user_id', $user->id)
             ->whereYear('created_at', now()->year)
-            ->first();
+            ->exists();
 
-        if ($existingClaim) {
-            $errorMessage = 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
+        if ($hasClaimedAny) {
+            $errorMessage = 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have any questions, please contact us at info@thinkgraphtech.com, and we will assist you.';
             
             return response()->json([
                 'success' => false,

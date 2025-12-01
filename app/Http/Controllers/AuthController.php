@@ -105,7 +105,7 @@ class AuthController extends Controller
     {
         return $user->isAdmin()
             ? redirect()->route('admin.dashboard')
-            : redirect()->route('user.journey');
+            : redirect()->route('user.gift.categories');
     }
 }
 
