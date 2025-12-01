@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->seedAdmin();
         $this->seedTestUser();
-        $this->call(UserGiftRequestSeeder::class);
     }
 
     protected function seedAdmin(): void
