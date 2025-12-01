@@ -177,6 +177,26 @@
         const loader = document.getElementById('global-loader');
         if (!loader) return;
 
+        // Get current route path (without query parameters)
+        const currentRoute = window.location.pathname;
+        
+        // Check if this route has been visited in this login session
+        const visitedRoutesKey = 'holiday_app_visited_routes';
+        let visitedRoutes = JSON.parse(sessionStorage.getItem(visitedRoutesKey) || '[]');
+        
+        // Check if current route has already been visited
+        const hasVisitedRoute = visitedRoutes.includes(currentRoute);
+        
+        // If route has been visited, hide loader immediately
+        if (hasVisitedRoute) {
+            loader.style.display = 'none';
+            return;
+        }
+        
+        // Mark this route as visited
+        visitedRoutes.push(currentRoute);
+        sessionStorage.setItem(visitedRoutesKey, JSON.stringify(visitedRoutes));
+
         const hideLoader = () => {
             if (loader.classList.contains('loader-hidden')) return;
             loader.classList.add('loader-hidden');
