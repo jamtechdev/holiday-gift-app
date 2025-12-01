@@ -16,6 +16,10 @@ class Gift extends Model
         'image',
     ];
 
+    protected $casts = [
+        'image' => 'array',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

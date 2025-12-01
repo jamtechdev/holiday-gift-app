@@ -2,6 +2,10 @@
 
 @section('title', 'Gifts')
 
+@push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+@endpush
+
 @section('journey-content')
 
 <style>
@@ -506,6 +510,33 @@ img.giftbox {
     padding: 7px 14px;
     border-radius: 30px;
 }
+
+/* Swiper Styles */
+.gift-swiper {
+    width: 100%;
+    max-width: 280px;
+    height: 280px;
+}
+.gift-swiper .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gift-swiper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.gift-swiper .swiper-pagination {
+    bottom: -30px;
+}
+.gift-swiper .swiper-pagination-bullet {
+    background: #dcd08f;
+    opacity: 0.5;
+}
+.gift-swiper .swiper-pagination-bullet-active {
+    opacity: 1;
+}
 </style>
 
 <div class="gift-container" >
@@ -540,10 +571,29 @@ img.giftbox {
 
         @if(isset($gifts) && $gifts->count() > 0)
             @foreach($gifts as $gift)
+                @php
+                    $images = is_array($gift->image) ? $gift->image : (is_string($gift->image) && $gift->image ? [$gift->image] : []);
+                    $imageCount = count($images);
+                @endphp
                 <div class="boxes">
                     <a href="#">
-                        @if($gift->image)
-                            <img src="{{ asset('storage/'.$gift->image) }}" class="giftbox" alt="{{ $gift->name }}"/>
+                        @if($imageCount > 0)
+                            @if($imageCount > 1)
+                                <!-- Swiper for multiple images -->
+                                <div class="swiper gift-swiper">
+                                    <div class="swiper-wrapper">
+                                        @foreach($images as $img)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('storage/'.$img) }}" class="giftbox" alt="{{ $gift->name }}"/>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            @else
+                                <!-- Single image -->
+                                <img src="{{ asset('storage/'.$images[0]) }}" class="giftbox" alt="{{ $gift->name }}"/>
+                            @endif
                         @else
                             <img src="{{ asset('images/'.$giftBoxImage) }}" class="giftbox" alt="{{ $gift->name }}"/>
                         @endif
@@ -788,5 +838,46 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
         toastr.error(errorMessage);
     });
 });
+
 </script>
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// Initialize Swiper for gift images after library loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait for Swiper to be available
+    if (typeof Swiper !== 'undefined') {
+        initializeSwipers();
+    } else {
+        // Retry if Swiper isn't loaded yet
+        setTimeout(function() {
+            if (typeof Swiper !== 'undefined') {
+                initializeSwipers();
+            }
+        }, 100);
+    }
+    
+    function initializeSwipers() {
+        const swipers = document.querySelectorAll('.gift-swiper');
+        swipers.forEach(function(swiperEl) {
+            const slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
+            new Swiper(swiperEl, {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                pagination: {
+                    el: swiperEl.querySelector('.swiper-pagination'),
+                    clickable: true,
+                },
+                autoplay: slideCount > 1 ? {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                } : false,
+                loop: slideCount > 1,
+            });
+        });
+    }
+});
+</script>
+@endpush
 @endsection

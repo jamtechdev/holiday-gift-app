@@ -28,8 +28,13 @@
         </div>
         
         <div class="form-group">
-            <input type="file" name="image" class="form-input" accept="image/*" required>
-            @error('image')
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #374151;">Gift Images</label>
+            <input type="file" name="images[]" class="form-input" accept="image/*" multiple required>
+            <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #6b7280;">You can select multiple images. They will be displayed in a swiper on the frontend.</p>
+            @error('images')
+                <p style="margin-top: 0.25rem; font-size: 0.875rem; color: #dc2626;">{{ $message }}</p>
+            @enderror
+            @error('images.*')
                 <p style="margin-top: 0.25rem; font-size: 0.875rem; color: #dc2626;">{{ $message }}</p>
             @enderror
         </div>

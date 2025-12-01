@@ -26,8 +26,18 @@
         @foreach($gifts as $gift)
         <div class="gift-card">
             <div class="gift-image">
-                @if($gift->image)
-                <img src="{{ asset('storage/' . $gift->image) }}" alt="{{ $gift->name }}">
+                @php
+                    $images = is_array($gift->image) ? $gift->image : (is_string($gift->image) && $gift->image ? [$gift->image] : []);
+                    $firstImage = count($images) > 0 ? $images[0] : null;
+                    $imageCount = count($images);
+                @endphp
+                @if($firstImage)
+                <img src="{{ asset('storage/' . $firstImage) }}" alt="{{ $gift->name }}">
+                @if($imageCount > 1)
+                <div style="position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.7); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                    +{{ $imageCount - 1 }}
+                </div>
+                @endif
                 @else
                 <div class="gift-no-image">🎁</div>
                 @endif
