@@ -963,9 +963,235 @@ body {
 
 .detail-page-container {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    overflow: hidden;
+}
+
+.detail-header-section {
+    background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.92) 0, rgba(248, 250, 252, 0.98) 35%, rgba(229, 231, 235, 1) 100%);
+    border-radius: 24px;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(209, 213, 219, 0.8);
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.detail-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.detail-content-section {
+    background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.92) 0, rgba(248, 250, 252, 0.98) 35%, rgba(229, 231, 235, 1) 100%);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(209, 213, 219, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+    max-height: calc(100vh - 280px);
+}
+
+.detail-sidebar-section {
+    position: sticky;
+    top: 1.5rem;
+}
+
+.gift-info-card {
+    background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.92) 0, rgba(248, 250, 252, 0.98) 35%, rgba(229, 231, 235, 1) 100%);
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(209, 213, 219, 0.8);
+}
+
+.gift-info-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.gift-info-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+.gift-info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: #f97373;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.gift-info-link:hover {
+    color: #fb7185;
+}
+
+.gift-info-link svg {
+    width: 12px;
+    height: 12px;
+}
+
+@media (max-width: 1024px) {
+    .detail-content-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .detail-sidebar-section {
+        position: static;
+    }
+    
+    .detail-content-section {
+        max-height: none;
+    }
+}
+
+.detail-content-section::-webkit-scrollbar {
+    width: 14px;
+}
+
+.detail-content-section::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 7px;
+    border: 1px solid #e5e7eb;
+}
+
+.detail-content-section::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 7px;
+    border: 2px solid #f3f4f6;
+    min-height: 30px;
+}
+
+.detail-content-section::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+.detail-content-section::-webkit-scrollbar-button {
+    display: block;
+    height: 16px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+}
+
+.detail-content-section::-webkit-scrollbar-button:vertical:start:decrement {
+    background: #f3f4f6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236b7280' d='M5 2l3 3H2z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: 10px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.detail-content-section::-webkit-scrollbar-button:vertical:end:increment {
+    background: #f3f4f6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236b7280' d='M5 8L2 5h6z'/%3E%3C/svg%3E") no-repeat center;
+    background-size: 10px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+/* Firefox scrollbar */
+.detail-content-section {
+    scrollbar-width: auto;
+    scrollbar-color: #9ca3af #f3f4f6;
+}
+
+.detail-group {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.detail-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-group-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #94a3b8;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+}
+
+.gift-info-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.gift-badge-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.gift-badge-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+.gift-badge-link {
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.gift-badge-link:hover {
+    transform: translateY(-2px);
+}
+
+.gift-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #f97373, #fb7185);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 12px rgba(249, 115, 115, 0.3);
+    max-width: fit-content;
+    transition: box-shadow 0.2s;
+}
+
+.gift-badge-link:hover .gift-badge {
+    box-shadow: 0 6px 16px rgba(249, 115, 115, 0.4);
+}
+
+.gift-badge-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px;
+}
+
+.gift-badge-text {
+    color: white;
+    font-weight: 600;
 }
 
 .detail-meta-card {
@@ -1046,6 +1272,13 @@ body {
     align-items: stretch;
 }
 
+.detail-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
 .detail-section {
     background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(148, 163, 184, 0.3);
@@ -1053,7 +1286,7 @@ body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    width: 100%;
 }
 
 .detail-section-span {
@@ -1103,6 +1336,9 @@ body {
     margin: 0;
     color: #0f172a;
     font-weight: 500;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 @media (max-width: 640px) {

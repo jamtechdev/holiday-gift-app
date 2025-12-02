@@ -5,44 +5,24 @@
 
 @section('admin-content')
 <div class="detail-page-container">
-    <div class="card detail-meta-card">
-        <div class="detail-header">
-            <div>
-                <p class="detail-eyebrow">Request #{{ $userGiftRequest->id }}</p>
-                <h3 class="detail-title">{{ $userGiftRequest->name }}</h3>
-                <div class="detail-meta">
-                    Submitted on {{ $userGiftRequest->created_at->format('M d, Y \\a\\t h:i A') }}
-                    · {{ $userGiftRequest->email }}
-                </div>
+    <div class="detail-header-section">
+        <div>
+            <p class="detail-eyebrow">Request #{{ $userGiftRequest->id }}</p>
+            <h3 class="detail-title">{{ $userGiftRequest->name }}</h3>
+            <div class="detail-meta">
+                Submitted on {{ $userGiftRequest->created_at->format('M d, Y \\a\\t h:i A') }}
+                · {{ $userGiftRequest->email }}
             </div>
-            <div class="detail-header-actions">
-                <a href="{{ route('admin.gift-requests.index') }}" class="admin-btn-sm">Back to List</a>
-            </div>
+        </div>
+        <div class="detail-header-actions">
+            <a href="{{ route('admin.gift-requests.index') }}" class="admin-btn-sm">Back to List</a>
         </div>
     </div>
 
-    <div class="detail-stats-grid">
-        <div class="detail-stat-card">
-            <p class="detail-stats-label">Category</p>
-            <h4 class="detail-stats-value">{{ $userGiftRequest->category->name }}</h4>
-            <span class="detail-stats-meta">Gift label selected</span>
-        </div>
-        <div class="detail-stat-card">
-            <p class="detail-stats-label">Location</p>
-            <h4 class="detail-stats-value">{{ $userGiftRequest->city }}, {{ $userGiftRequest->state }}</h4>
-            <span class="detail-stats-meta">{{ $userGiftRequest->zip }}</span>
-        </div>
-        <div class="detail-stat-card">
-            <p class="detail-stats-label">Submitted</p>
-            <h4 class="detail-stats-value">{{ $userGiftRequest->created_at->format('M d, Y') }}</h4>
-            <span class="detail-stats-meta">{{ $userGiftRequest->created_at->diffForHumans() }}</span>
-        </div>
-    </div>
-
-    <div class="card request-detail-card">
-        <div class="detail-grid">
-            <div class="detail-section detail-section-span">
-                <div class="detail-section-heading">Personal Information</div>
+    <div class="detail-content-wrapper">
+        <div class="detail-content-section">
+            <div class="detail-group">
+                <div class="detail-group-heading">Personal Information</div>
                 <dl class="detail-list">
                     <div>
                         <dt>Email</dt>
@@ -59,8 +39,8 @@
                 </dl>
             </div>
 
-            <div class="detail-section">
-                <div class="detail-section-heading">Shipping Address</div>
+            <div class="detail-group">
+                <div class="detail-group-heading">Shipping Address</div>
                 <dl class="detail-list">
                     <div>
                         <dt>Street</dt>
@@ -76,20 +56,70 @@
                     </div>
                 </dl>
             </div>
+        </div>
 
-            <div class="detail-section detail-section-span">
-                <div class="detail-section-heading">Gift Selection</div>
-                <div class="detail-gift">
-                    @if($userGiftRequest->category->image)
-                        <img src="{{ asset('storage/' . $userGiftRequest->category->image) }}" alt="{{ $userGiftRequest->category->name }}">
-                    @endif
-                    <div>
-                        <div class="detail-gift-label">{{ $userGiftRequest->category->name }}</div>
-                        <p>Chosen category for this request.</p>
+        <div class="detail-sidebar-section">
+            <div class="gift-info-card">
+                <div class="gift-info-header">
+                    <div class="gift-info-title">Gift Information</div>
+                </div>
+                <div class="gift-info-badges">
+                    <div class="gift-badge-item">
+                        <div class="gift-badge-label">Category</div>
+                        @if($userGiftRequest->category)
+                        <a href="{{ route('admin.categories.index') }}" class="gift-badge-link">
+                            <div class="gift-badge">
+                                @if($userGiftRequest->category->image)
+                                    <img src="{{ asset('storage/' . $userGiftRequest->category->image) }}" alt="{{ $userGiftRequest->category->name }}" class="gift-badge-icon">
+                                @endif
+                                <span class="gift-badge-text">{{ $userGiftRequest->category->name }}</span>
+                            </div>
+                        </a>
+                        @else
+                        <div class="gift-badge">
+                            <span class="gift-badge-text">Uncategorized</span>
+                        </div>
+                        @endif
                     </div>
+                    @if($userGiftRequest->category && strtolower($userGiftRequest->category->name) === 'donation' && $userGiftRequest->charity_selection)
+                    <div class="gift-badge-item">
+                        <div class="gift-badge-label">Charity Selection</div>
+                        @php
+                            $charityLabels = [
+                                'wildheart' => 'Wild Heart Ministries',
+                                'lionheart' => 'Lion Heart Foundation',
+                                'split' => 'Split 50% / 50%'
+                            ];
+                            $charityLabel = $charityLabels[$userGiftRequest->charity_selection] ?? ucfirst($userGiftRequest->charity_selection);
+                            $charityLogo = null;
+                            $charityLink = null;
+
+                            if($userGiftRequest->charity_selection === 'lionheart') {
+                                $charityLogo = asset('images/lionlogo.webp');
+                                $charityLink = 'https://www.themicahparsons.com/givingback';
+                            } elseif($userGiftRequest->charity_selection === 'wildheart') {
+                                $charityLogo = asset('images/location.png');
+                                $charityLink = 'https://www.wildheartministries.net/';
+                            }
+                        @endphp
+                        @if($charityLink)
+                        <a href="{{ $charityLink }}" target="_blank" class="gift-badge-link">
+                            <div class="gift-badge">
+                                @if($charityLogo)
+                                    <img src="{{ $charityLogo }}" alt="{{ $charityLabel }}" class="gift-badge-icon">
+                                @endif
+                                <span class="gift-badge-text">{{ $charityLabel }}</span>
+                            </div>
+                        </a>
+                        @else
+                        <div class="gift-badge">
+                            <span class="gift-badge-text">{{ $charityLabel }}</span>
+                        </div>
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -34,6 +34,7 @@ class UserGiftRequestController extends Controller
 
     public function show(UserGiftRequest $userGiftRequest)
     {
+        $userGiftRequest->load('category', 'user');
         return view('admin.gift-requests.show', compact('userGiftRequest'));
     }
 
