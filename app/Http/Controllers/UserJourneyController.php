@@ -109,11 +109,4 @@ class UserJourneyController extends Controller
             'category' => $giftRequest?->category,
         ]);
     }
-
-public function page3 (){
-
-return view('journey.page3');
-}
-
-
 }

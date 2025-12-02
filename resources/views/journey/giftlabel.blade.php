@@ -365,13 +365,29 @@ a.category-link.shape-3 span {
 
     .video-page {
             min-height: 100vh;
-
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.9));
             color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        .video-page.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .videoContainer video {
             width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         @media screen and (min-width:668px) {
@@ -379,9 +395,11 @@ a.category-link.shape-3 span {
                 width: 100%;
                 max-width: 1440px;
                 margin: 0 auto;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-
-
 
             .mobileVideo {
                 display: none;
@@ -393,22 +411,35 @@ a.category-link.shape-3 span {
                 display: none;
             }
         }
+
+        /* Initially hide gift container */
+        .gift-container {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out 0.3s, visibility 0.8s ease-in-out 0.3s;
+        }
+
+        /* Show gift container after video */
+        .gift-container.show {
+            opacity: 1;
+            visibility: visible;
+        }
 </style>
 
+<!-- Video Section - Shows first -->
+<div class="video-page" id="videoPage">
+    <div class="videoContainer">
+        <video type="video/mp4" id="afterVideo" class="desktopVideo"
+            src="{{ asset('images/videos/screen-2-video-desktop.mp4') }}" autoplay muted
+            playsinline></video>
+        <video type="video/mp4" id="afterVideomobile" class="mobileVideo"
+            src="{{ asset('images/videos/screen-2-video-mobile.mp4') }}" autoplay muted
+            playsinline></video>
+    </div>
+</div>
 
-
-<!-- <div class="video-page">
-        <div class="videoContainer">
-            <video type="video/mp4" id="afterVideo" class=" desktopVideo"
-                src="{{ asset('images//videos/screen-2-video-desktop.mp4') }} " controls autoplay muted
-                playsinline></video>
-            <video type="video/mp4" id="afterVideomobile" class=" mobileVideo"
-                src="{{ asset('images//videos/screen-2-video-mobile.mp4') }} " controls autoplay muted
-                playsinline></video>
-        </div>
-    </div> -->
-
-<div class="gift-container">
+<!-- Gift Container Section - Shows after video -->
+<div class="gift-container" id="giftContainer">
     <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
         @csrf
         <button type="submit" class="logout">
@@ -447,6 +478,55 @@ a.category-link.shape-3 span {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Video control logic
+    const videoDesktop = document.getElementById("afterVideo");
+    const videoMobile = document.getElementById("afterVideomobile");
+    const videoPage = document.getElementById("videoPage");
+    const giftContainer = document.getElementById("giftContainer");
+    const startTime = 1;  // Start at 1 second
+
+    // Function to handle video end with smooth transition
+    function handleVideoEnd() {
+        // Add fade out animation to video page
+        videoPage.classList.add('hide');
+
+        // After fade out completes, show gift container with fade in
+        setTimeout(() => {
+            giftContainer.classList.add('show');
+        }, 300); // Small delay for smooth transition
+    }
+
+    // Desktop video handler
+    if (videoDesktop) {
+        videoDesktop.addEventListener("loadedmetadata", () => {
+            videoDesktop.currentTime = startTime;
+            videoDesktop.play().catch(err => {
+                console.log('Video autoplay prevented:', err);
+            });
+        });
+
+        // Let video play completely, don't cut it
+        videoDesktop.addEventListener("ended", () => {
+            handleVideoEnd();
+        });
+    }
+
+    // Mobile video handler
+    if (videoMobile) {
+        videoMobile.addEventListener("loadedmetadata", () => {
+            videoMobile.currentTime = startTime;
+            videoMobile.play().catch(err => {
+                console.log('Video autoplay prevented:', err);
+            });
+        });
+
+        // Let video play completely, don't cut it
+        videoMobile.addEventListener("ended", () => {
+            handleVideoEnd();
+        });
+    }
+
+    // Category links click handler
     const categoryLinks = document.querySelectorAll('.category-link');
 
     categoryLinks.forEach(link => {
