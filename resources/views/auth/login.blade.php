@@ -30,7 +30,7 @@ input {
     /* display: flex;
     align-items: center; */
     gap: 10px;
-    font-family: cursive;
+    font-family: Montserrat;
     /* justify-content: space-between; */
 }
 .remember_me input {

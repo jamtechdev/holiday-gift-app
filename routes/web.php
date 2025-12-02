@@ -55,3 +55,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/users-import', [UserController::class, 'importStore'])->name('users.import.store');
     });
 });
+
+
+Route::get('page3', [UserJourneyController::class, 'page3']);

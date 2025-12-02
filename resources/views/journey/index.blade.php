@@ -231,7 +231,7 @@ img.bgImage {
     width: 100%;
     height: 100vh;
     display: block;
-    max-width: 1140px;
+    max-width: 1440px;
     margin: 0px auto;
     overflow: hidden;
     position: relative;
@@ -254,7 +254,7 @@ img.bgImage {
 }
 @keyframes slideAndChange {
   0% {
-    transform: translateX(-1140px);
+    transform: translateX(-1440px);
   }
   100% {
     transform: translateX(10px); /* Move 300px to the right */
@@ -264,7 +264,7 @@ img.bgImage {
 @media screen and (max-width: 767px){
   @keyframes slideAndChange {
     0% {
-      transform: translateX(-1140px);
+      transform: translateX(-1440px);
     }
     100% {
       transform: translateX(-100px); /* Move 300px to the right */
@@ -358,7 +358,7 @@ img.bgImage {
 
 <div class="box animate fadeInRight four">
   <a href="{{ route('user.gift.categories') }}" class="next-btn">
-    <img src="{{ asset('images/02_INTRO PAGE_Gift button.png') }}" class="overlayImg hidedMobile" />
+    <img src="{{ asset('images/holiday-store-btn.png') }}" class="overlayImg hidedMobile" />
     <img src="{{ asset('images/store-mobile.png') }}" class="overlayImg hidedDesktop" />
   </a>
 </div>

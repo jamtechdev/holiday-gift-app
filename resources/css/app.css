@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-*{
-    font-family: "Montserrat", sans-serif!important;
+* {
+    font-family: "Montserrat", sans-serif !important;
 }
 
 .admin-btn,
@@ -64,7 +64,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
     background: #0f172a;
-    font-family: system-ui, sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .login-container {
@@ -115,8 +115,8 @@ body {
 .puzzle-form {
     background: transparent;
     padding: 0.5rem 3.5rem;
-        border-radius: 0;
-        box-shadow: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 .puzzle-form .form-group {
@@ -386,6 +386,7 @@ body {
 .terms-close-btn:hover {
     transform: translateY(-1px);
 }
+
 .login-btn {
     width: 100%;
     padding: 1rem;
@@ -1139,11 +1140,9 @@ body {
     padding: 1.5rem;
     border: 1px dashed rgba(248, 113, 113, 0.6);
     border-radius: 20px;
-    background: linear-gradient(
-        135deg,
-        rgba(248, 113, 113, 0.08),
-        rgba(248, 113, 113, 0.02)
-    );
+    background: linear-gradient(135deg,
+            rgba(248, 113, 113, 0.08),
+            rgba(248, 113, 113, 0.02));
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

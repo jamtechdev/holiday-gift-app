@@ -16,7 +16,7 @@ img.top_frame {
 .gift-container {
     width: 100%;
     height: 100vh;
-    max-width: 1140px;
+    max-width: 1440px;
     margin: 0px auto;
     position: relative;
     background-size: cover;

@@ -10,7 +10,7 @@
 .gift-container {
     width: 100%;
     height: 100vh;
-    max-width: 1140px;
+    max-width: 1440px;
     margin: 0px auto;
     position: relative;
     background-size: cover;
@@ -362,7 +362,51 @@ a.category-link.shape-3 span {
         color: #fff;
         cursor: pointer;
     }
+
+    .video-page {
+            min-height: 100vh;
+
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.9));
+            color: #fff;
+        }
+
+        .videoContainer video {
+            width: 100%;
+        }
+
+        @media screen and (min-width:668px) {
+            .videoContainer {
+                width: 100%;
+                max-width: 1440px;
+                margin: 0 auto;
+            }
+
+
+
+            .mobileVideo {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width:667.99px) {
+            .desktopVideo {
+                display: none;
+            }
+        }
 </style>
+
+
+
+<!-- <div class="video-page">
+        <div class="videoContainer">
+            <video type="video/mp4" id="afterVideo" class=" desktopVideo"
+                src="{{ asset('images//videos/screen-2-video-desktop.mp4') }} " controls autoplay muted
+                playsinline></video>
+            <video type="video/mp4" id="afterVideomobile" class=" mobileVideo"
+                src="{{ asset('images//videos/screen-2-video-mobile.mp4') }} " controls autoplay muted
+                playsinline></video>
+        </div>
+    </div> -->
 
 <div class="gift-container">
     <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
