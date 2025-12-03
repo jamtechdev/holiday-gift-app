@@ -351,10 +351,10 @@ img.bgImage {
 </video>   -->
 <img src="{{ asset('images/logo-1.png') }}" class="topLogo" />
 <img src="{{ asset('images/landing.png') }}" class="bgImage" />
-
+<!-- 
 <div class="box animate fadeInUp three">
     <img src="{{ asset('images/welcome.png') }}" class="overlayImg" id="welcomeImg" />
-</div>
+</div> -->
 
 <div class="box animate fadeInRight four">
   <a href="{{ route('user.gift.categories') }}" class="next-btn">

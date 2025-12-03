@@ -175,7 +175,7 @@ img.back:hover {
 }
 .modal-content {
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    margin: 5% auto;
+    margin: 1% auto;
     padding: 0;
     border: 2px solid #dcd08f;
     border-radius: 15px;
@@ -653,6 +653,14 @@ button.logout:hover {
 .gift-swiper .swiper-pagination-bullet-active {
     opacity: 1;
 }
+.swap {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.nameSwap {
+    display: flex;
+    column-gap: 17px;
+}
 </style>
 
 <div class="gift-container" >
@@ -721,8 +729,10 @@ button.logout:hover {
                         @endif
                     </a>
                     <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
+                      <div class="swap">  
                         <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
                         <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
+                      </div>  
                         <span class="price"><sup>€</sup>20</span>
                     </a>
                    <div>
@@ -736,8 +746,10 @@ button.logout:hover {
                     <img src="{{ asset('images/giftbox.png') }}" class="giftbox"/>
                 </a>
                 <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
-                    <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
-                    <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
+                    <div class="swap">
+                        <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
+                        <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
+                    </div>
                     <span class="price"><sup>€</sup>20</span>
                 </a>
 <div>
@@ -754,9 +766,9 @@ button.logout:hover {
                             <a href="https://www.wildheartministries.net/" target="_blank" class="charity-logo-link" title="Visit Wild Heart Ministries">
                                 <img src="{{ asset('images/location.png') }}" alt="Wild Heart Ministries" class="charity-logo" />
                             </a>
-                            <a href="https://www.themicahparsons.com/givingback" target="_blank" class="charity-logo-link" title="Visit Lion Heart Foundation">
+                            <!-- <a href="https://www.themicahparsons.com/givingback" target="_blank" class="charity-logo-link" title="Visit Lion Heart Foundation">
                                 <img src="{{ asset('images/lionlogo.webp') }}" alt="Lion Heart Foundation" class="lion-charity-logo" />
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                 @else
@@ -814,30 +826,48 @@ button.logout:hover {
                 <input type="hidden" name="category_id" id="category_id" value="">
                 <input type="hidden" name="redirect_to" value="{{ route('user.claimed') }}">
 
-                <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">First Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Last Name *</label>
+                        <input type="text" id="name" name="lastname" required placeholder="Enter your last name">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="street_address">Street Address *</label>
+                    <label for="street_address">Street Address #1</label>
                     <input type="text" id="street_address" name="street_address" required placeholder="Enter street address">
+                </div>
+
+                <div class="form-group">
+                    <label for="street_address">Street Address #2</label>
+                    <input type="text" id="street_address" name="street_address" placeholder="Enter street address">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
+                        <label for="name">Country *</label>
+                        <input type="text" id="name" name="country" required placeholder="Enter your country name">
+                    </div>
+                    <div class="form-group">
                         <label for="city">City *</label>
                         <input type="text" id="city" name="city" required placeholder="Enter city">
                     </div>
+                    
+                </div>
+
+                <div class="form-row">
                     <div class="form-group">
                         <label for="state">State *</label>
                         <input type="text" id="state" name="state" required maxlength="2" placeholder="XX" pattern="[A-Z]{2}" style="text-transform: uppercase;">
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="zip">ZIP Code *</label>
-                    <input type="text" id="zip" name="zip" required maxlength="5" placeholder="12345" pattern="[0-9]{5}">
+                    <div class="form-group">
+                        <label for="zip">Postal code *</label>
+                        <input type="text" id="zip" name="zip" required maxlength="5" placeholder="12345" pattern="[0-9]{5}">
+                    </div>
                 </div>
 
                 <div class="form-row">
