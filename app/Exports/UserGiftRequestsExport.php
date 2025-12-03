@@ -43,6 +43,11 @@ class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMappin
 
     public function map($request): array
     {
+        $phoneNumber = $request->telephone ?? '';
+        if ($request->country_code) {
+            $phoneNumber = $request->country_code . ' ' . $phoneNumber;
+        }
+        
         return [
             $request->name,
             $request->email,
@@ -52,7 +57,7 @@ class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMappin
             $request->state,
             $request->zip,
             $request->company,
-            $request->telephone,
+            $phoneNumber,
             $request->created_at?->format('Y-m-d H:i'),
         ];
     }

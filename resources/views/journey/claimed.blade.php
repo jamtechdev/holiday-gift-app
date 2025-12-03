@@ -119,95 +119,52 @@ img.overlayPuzzle {
     color: #0a0c3f;
     font-size: 20px;
 }
-.logout-container {
-    margin-top: 50px;
-    text-align: center;
+.cta-row {
+    margin-top: 20px;
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
-.logout-btn, .claim-again-btn {
-    background: linear-gradient(135deg, #0a0c3f 0%, #1a1c4f 100%);
-    color: white;
-    border: none;
-    padding: 16px 48px;
+.cta-text p {
+    margin: 0;
+    color: #0a0c3f;
     font-size: 18px;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(10, 12, 63, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    line-height: 1.6;
+}
+.cta-btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+.email-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    position: relative;
-    overflow: hidden;
+    justify-content: center;
+    padding: 14px 36px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #281c66, #4c2fc7);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     text-decoration: none;
+    box-shadow: 0 10px 30px rgba(40, 28, 102, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.claim-again-btn {
-    background: linear-gradient(135deg, #dcd08f 0%, #c4b87a 100%);
+.email-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(40, 28, 102, 0.45);
+}
+.email-note {
     color: #0a0c3f;
-    box-shadow: 0 4px 15px rgba(220, 208, 143, 0.3);
+    font-size: 13px;
 }
-.logout-btn::before, .claim-again-btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-.logout-btn:hover::before {
-    background: rgba(255, 255, 255, 0.2);
-}
-.claim-again-btn:hover::before {
-    background: rgba(10, 12, 63, 0.1);
-}
-.logout-btn:hover::before, .claim-again-btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-.logout-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(10, 12, 63, 0.4);
-    background: linear-gradient(135deg, #1a1c4f 0%, #2a2c5f 100%);
-}
-.claim-again-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(220, 208, 143, 0.4);
-    background: linear-gradient(135deg, #e8dc9f 0%, #d4c88a 100%);
-}
-.logout-btn:active, .claim-again-btn:active {
-    transform: translateY(-1px);
-}
-.logout-btn span, .claim-again-btn span {
-    position: relative;
-    z-index: 1;
-}
-.logout-icon, .claim-again-icon {
-    position: relative;
-    z-index: 1;
-    font-size: 20px;
-}
-@media (max-width: 768px) {
-    .logout-btn, .claim-again-btn {
-        padding: 14px 36px;
-        font-size: 16px;
-        width: 100%;
-        max-width: 280px;
-    }
-    .logout-container {
-        margin-top: 40px;
-        flex-direction: column;
-        align-items: center;
-    }
+.email-note a {
+    color: #0a0c3f;
+    text-decoration: underline;
+    font-weight: 600;
 }
 @media screen and (min-width:668px) {
     .gift-container{
@@ -263,31 +220,70 @@ img.overlayPuzzle {
     font-size: 12px;
     line-height: normal;
 }
-.logout-container {
-    margin-top: 20px;
-    gap: 10px;
-
-}
 .boxes a{
     min-width: unset !important;
 }
-.logout-btn, .claim-again-btn {
-        padding: 10px 20px;
-        font-size: 16px;
-        font-size: 16px !important;
+
+/* Logout Button Styles */
+form[action*="logout"] {
+    position: fixed;
+    top: 15px;
+    right: 50px;
+    z-index: 9999;
+    display: inline-block;
+}
+button.logout {
+    height: 42px;
+    background: #ffff;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #e16539;
+    padding: 10px;
+    border: 1px solid #e16539;
+    cursor: pointer;
+}
+button.logout:hover {
+    background: #e16539;
+    color: #fff;
+    cursor: pointer;
+}
+@media screen and (max-width: 667.99px) {
+    form[action*="logout"] {
+        top: 10px;
+        right: 15px;
+    }
+    button.logout {
+        height: 36px;
+        width: 36px;
+        padding: 8px;
+    }
+}
+
+    .cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cta-btn-wrapper {
         width: 100%;
-        text-align: center;
-        align-items: center;
+        align-items: flex-start;
+    }
+    .email-btn {
+        width: 100%;
         justify-content: center;
     }
-    .logout-container form {
-    width: 100%;
-    text-align: center;
-}
 }
 </style>
 
 <div class="gift-container" style="">
+    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit" class="logout">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+        </button>
+    </form>
     <div class="giftBox">
 
         <div class="logoBox">
@@ -325,21 +321,23 @@ img.overlayPuzzle {
             <div>
                 <h5>You have chosen {{ strtolower($displayCategoryName) }}.</h5>
                 <h2>Your gift is on the<br> way to you.</h2>
-                <p>Thank you for visiting the<br> Graphtech Holiday Store!<br> We hope you enjoy your gift and we<br> wish you a joyful holiday season<br> and a prosperous New Year</p>
-
-                <div class="logout-container">
-                    <a href="{{ route('user.gift.categories') }}" class="claim-again-btn">
-                        <span class="claim-again-icon">🎁</span>
-                        <span>Claim Again</span>
-                    </a>
-                    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="logout-btn">
-                            <span class="logout-icon">🚪</span>
-                            <span>Logout</span>
-                        </button>
-                    </form>
+                <div class="cta-row">
+                    <div class="cta-text">
+                        <p>
+                            Graphtech is ready to help you drive efficiency, creativity,
+                            and measurable results in 2026.<br><br>
+                            Let’s start the conversation—your next big initiative could be
+                            just one email/meeting away.
+                        </p>
+                    </div>
+                    <div class="cta-btn-wrapper">
+                        <a href="mailto:mike.mivska@thinkgraphtech.com" class="email-btn">Email</a>
+                        <div class="email-note">
+                            <a href="mailto:mike.mivska@thinkgraphtech.com">Mike.mivska@thinkgraphtech.com</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
         @else
@@ -350,21 +348,23 @@ img.overlayPuzzle {
             <div>
                 <h5>You have chosen your gift.</h5>
                 <h2>Your gift is on the<br> way to you.</h2>
-                <p>Thank you for visiting the<br> Graphtech Holiday Store!<br> We hope you enjoy your gift and we<br> wish you a joyful holiday season<br> and a prosperous New Year</p>
-
-                <div class="logout-container">
-                    <a href="{{ route('user.gift.categories') }}" class="claim-again-btn">
-                        <span class="claim-again-icon">🎁</span>
-                        <span>Claim Again</span>
-                    </a>
-                    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
-                        @csrf
-                        <button type="submit" class="logout-btn">
-                            <span class="logout-icon">🚪</span>
-                            <span>Logout</span>
-                        </button>
-                    </form>
+                <div class="cta-row">
+                    <div class="cta-text">
+                        <p>
+                            Graphtech is ready to help you drive efficiency, creativity,
+                            and measurable results in 2026.<br><br>
+                            Let’s start the conversation—your next big initiative could be
+                            just one email/meeting away.
+                        </p>
+                    </div>
+                    <div class="cta-btn-wrapper">
+                        <a href="mailto:mike.mivska@thinkgraphtech.com" class="email-btn">Email</a>
+                        <div class="email-note">
+                            <a href="mailto:mike.mivska@thinkgraphtech.com">Mike.mivska@thinkgraphtech.com</a>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
         @endif

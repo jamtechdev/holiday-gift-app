@@ -379,6 +379,10 @@ img.bgImage {
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Clear video watched flag when user comes to journey page
+        // This ensures video will play again when user clicks to go to gift categories
+        localStorage.removeItem('giftLabelVideoWatched');
+        
         const welcomeImg = document.getElementById('welcomeImg');
         // Hide image after 3 seconds
         setTimeout(function() {

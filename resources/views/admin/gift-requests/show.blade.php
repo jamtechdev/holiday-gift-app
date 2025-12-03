@@ -30,7 +30,7 @@
                     </div>
                     <div>
                         <dt>Phone</dt>
-                        <dd>{{ $userGiftRequest->telephone ?? '—' }}</dd>
+                        <dd>{{ ($userGiftRequest->country_code ? $userGiftRequest->country_code . ' ' : '') . ($userGiftRequest->telephone ?? '—') }}</dd>
                     </div>
                     <div>
                         <dt>Company</dt>

@@ -169,20 +169,30 @@ img.back:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+}
+.modal[style*="display: flex"],
+.modal[style*="display: block"] {
+    display: flex !important;
 }
 .modal-content {
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    margin: 1% auto;
+    margin: auto;
     padding: 0;
     border: 2px solid #dcd08f;
     border-radius: 15px;
     width: 90%;
-    max-width: 600px;
+    max-width: 1000px;
+    max-height: 95vh;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     animation: modalSlideIn 0.3s ease-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Already Claimed Modal - Wider and Better UI */
@@ -354,11 +364,12 @@ img.back:hover {
 }
 .modal-header {
     background: linear-gradient(135deg, #dcd08f 0%, #b8a85a 100%);
-    padding: 20px 30px;
+    padding: 15px 30px;
     border-radius: 13px 13px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-shrink: 0;
 }
 .modal-header h2 {
     margin: 0;
@@ -367,6 +378,22 @@ img.back:hover {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+@media screen and (max-width: 667.99px) {
+    .modal-header {
+        padding: 12px 15px;
+    }
+    .modal-header h2 {
+        font-size: 16px;
+        letter-spacing: 0.5px;
+    }
+    .close {
+        font-size: 24px;
+    }
+    .modal-content {
+        width: 95%;
+        max-height: 98vh;
+    }
 }
 .close {
     color: #1a1a1a;
@@ -383,9 +410,23 @@ img.back:hover {
 }
 .modal-body {
     padding: 30px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: calc(95vh - 80px);
+}
+@media screen and (max-width: 667.99px) {
+    .modal-body {
+        padding: 15px 12px;
+        max-height: calc(95vh - 70px);
+    }
 }
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+}
+@media screen and (max-width: 667.99px) {
+    .form-group {
+        margin-bottom: 12px;
+    }
 }
 .form-group label {
     display: block;
@@ -408,6 +449,17 @@ img.back:hover {
     transition: all 0.3s;
     box-sizing: border-box;
 }
+@media screen and (max-width: 667.99px) {
+    .form-group input,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+    .form-group label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+}
 .form-group input:focus,
 .form-group select:focus {
     outline: none;
@@ -423,11 +475,31 @@ img.back:hover {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
+
+@media screen and (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+    }
+}
 .form-actions {
     display: flex;
     gap: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     justify-content: flex-end;
+}
+@media screen and (max-width: 667.99px) {
+    .form-actions {
+        margin-top: 15px;
+        gap: 10px;
+    }
 }
 .btn {
     padding: 12px 30px;
@@ -439,6 +511,18 @@ img.back:hover {
     transition: all 0.3s;
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+@media screen and (max-width: 667.99px) {
+    .form-actions {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
 }
 .btn-primary {
     background: linear-gradient(135deg, #dcd08f 0%, #b8a85a 100%);
@@ -484,6 +568,8 @@ img.back:hover {
     left: 0;
     right: 0;
     text-align: center;
+    max-width: 100%;
+    padding: 0 15px;
 }
 .boxes {
     gap: 15px;
@@ -492,6 +578,7 @@ img.back:hover {
     margin:auto !important;
     height: 87vh;
     align-items: center;
+    padding: 0 15px;
 }
 img.giftbox {
     width: 100%;
@@ -500,8 +587,26 @@ img.giftbox {
 .boxes a, .boxes button{
     flex: unset !important;
 }
-.form-actions {
-    flex-direction: column;
+.price {
+    font-size: 42px;
+}
+.price sup {
+    font-size: 28px;
+}
+.selectedGift {
+    max-width: 90px;
+}
+.choose {
+    max-width: 180px;
+}
+.claim-btn {
+    font-size: 18px;
+    padding: 8px 20px;
+}
+.modal-content {
+    width: 95%;
+    margin: 5% auto;
+    max-height: 90vh;
 }
 }
 
@@ -536,6 +641,17 @@ button.logout:hover {
     background: #e16539;
     color: #fff;
     cursor: pointer;
+}
+@media screen and (max-width: 667.99px) {
+    form[action*="logout"] {
+        top: 10px;
+        right: 15px;
+    }
+    button.logout {
+        height: 36px;
+        width: 36px;
+        padding: 8px;
+    }
 }
 
 /* Charity Selection Styles */
@@ -633,6 +749,12 @@ button.logout:hover {
     max-width: 280px;
     height: 280px;
 }
+@media screen and (max-width: 667.99px) {
+    .gift-swiper {
+        max-width: 150px;
+        height: 150px;
+    }
+}
 .gift-swiper .swiper-slide {
     display: flex;
     align-items: center;
@@ -729,11 +851,11 @@ button.logout:hover {
                         @endif
                     </a>
                     <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
-                      <div class="swap">  
+                      <div class="swap">
                         <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
                         <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
-                      </div>  
-                        <span class="price"><sup>€</sup>20</span>
+                      </div>
+                        <span class="price"><sup>$</sup>20</span>
                     </a>
                    <div>
                     <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
@@ -826,89 +948,75 @@ button.logout:hover {
                 <input type="hidden" name="category_id" id="category_id" value="">
                 <input type="hidden" name="redirect_to" value="{{ route('user.claimed') }}">
 
+                <!-- First Name and Last Name in one row -->
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">First Name *</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your first name">
                     </div>
                     <div class="form-group">
-                        <label for="name">Last Name *</label>
-                        <input type="text" id="name" name="lastname" required placeholder="Enter your last name">
+                        <label for="lastname">Last Name *</label>
+                        <input type="text" id="lastname" name="lastname" required placeholder="Enter your last name">
                     </div>
                 </div>
 
+                <!-- Email -->
                 <div class="form-group">
-                    <label for="street_address">Street Address #1</label>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+
+                <!-- Street Address #1 -->
+                <div class="form-group">
+                    <label for="street_address">Street Address #1 *</label>
                     <input type="text" id="street_address" name="street_address" required placeholder="Enter street address">
                 </div>
 
+                <!-- Street Address #2 -->
                 <div class="form-group">
-                    <label for="street_address">Street Address #2</label>
-                    <input type="text" id="street_address" name="street_address" placeholder="Enter street address">
+                    <label for="street_address2">Street Address #2</label>
+                    <input type="text" id="street_address2" name="street_address2" placeholder="Enter street address (optional)">
                 </div>
 
+                <!-- Country and State in one row -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="name">Country *</label>
-                        <input type="text" id="name" name="country" required placeholder="Enter your country name">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Country">
                     </div>
-                    <div class="form-group">
-                        <label for="city">City *</label>
-                        <input type="text" id="city" name="city" required placeholder="Enter city">
-                    </div>
-                    
-                </div>
-
-                <div class="form-row">
                     <div class="form-group">
                         <label for="state">State *</label>
                         <input type="text" id="state" name="state" required maxlength="2" placeholder="XX" pattern="[A-Z]{2}" style="text-transform: uppercase;">
                     </div>
+                </div>
+
+                <!-- City and Postal Code in one row -->
+                <div class="form-row">
                     <div class="form-group">
-                        <label for="zip">Postal code *</label>
+                        <label for="city">City *</label>
+                        <input type="text" id="city" name="city" required placeholder="City">
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">Postal Code *</label>
                         <input type="text" id="zip" name="zip" required maxlength="5" placeholder="12345" pattern="[0-9]{5}">
                     </div>
                 </div>
 
+                <!-- Phone Number and Company in one row -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="telephone">Telephone *</label>
-                        <input type="tel" id="telephone" name="telephone" required maxlength="10" placeholder="1234567890" pattern="[0-9]{10}">
+                        <label for="telephone">Phone Number *</label>
+                        <input type="tel" id="telephone" name="telephone" required autocomplete="tel" placeholder="Enter phone number">
+                        <input type="hidden" id="country_code" name="country_code" value="">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        <label for="company">Company (Optional)</label>
+                        <input type="text" id="company" name="company" placeholder="Enter company name">
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="company">Company (Optional)</label>
-                    <input type="text" id="company" name="company" placeholder="Enter company name">
-                </div>
-
-                <div class="form-group" id="charity-selection-group" style="display: none;">
-                    <label>Charity Selection *</label>
-                    <div class="charity-selection-options">
-                        <div class="charity-radio-group">
-                            <div class="charity-radio-option">
-                                <input type="radio" id="charity_wildheart" name="charity_selection" value="wildheart" required>
-                                <label for="charity_wildheart">Wild Heart Ministries (100%)</label>
-                            </div>
-                            <div class="charity-radio-option">
-                                <input type="radio" id="charity_lionheart" name="charity_selection" value="lionheart">
-                                <label for="charity_lionheart">Lion Heart Foundation (100%)</label>
-                            </div>
-                            <div class="charity-radio-option">
-                                <input type="radio" id="charity_split" name="charity_selection" value="split">
-                                <label for="charity_split">Split 50% / 50%</label>
-                            </div>
-                        </div>
-                        <div style="margin-top: 10px; font-size: 12px; color: #999;">
-                            <a href="https://www.wildheartministries.net/" target="_blank" style="color: #dcd08f; text-decoration: none;">Visit Wild Heart Ministries</a> |
-                            <a href="https://www.themicahparsons.com/givingback" target="_blank" style="color: #dcd08f; text-decoration: none;">Visit Lion Heart Foundation</a>
-                        </div>
-                    </div>
-                </div>
+                <!-- Hidden field for charity selection - default wildheart for donation category -->
+                <input type="hidden" id="charity_selection" name="charity_selection" value="">
 
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="closeModalWithConfirm()">Cancel</button>
@@ -934,27 +1042,22 @@ function openModal(categoryId, categoryName = '') {
 
     document.getElementById('category_id').value = categoryId;
 
-    // Show/hide charity selection field for donation category
-    const charitySelectionGroup = document.getElementById('charity-selection-group');
-    const charitySelectionInputs = charitySelectionGroup.querySelectorAll('input[type="radio"]');
-
+    // Set default charity to wildheart for donation category (hidden)
+    const charitySelectionField = document.getElementById('charity_selection');
     if (categoryName && categoryName.toLowerCase() === 'donation') {
-        charitySelectionGroup.style.display = 'block';
-        charitySelectionInputs.forEach(input => input.setAttribute('required', 'required'));
+        charitySelectionField.value = 'wildheart';
     } else {
-        charitySelectionGroup.style.display = 'none';
-        charitySelectionInputs.forEach(input => {
-            input.removeAttribute('required');
-            input.checked = false;
-        });
+        charitySelectionField.value = '';
     }
 
-    document.getElementById('giftDetailsModal').style.display = 'block';
+    const modal = document.getElementById('giftDetailsModal');
+    modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-    document.getElementById('giftDetailsModal').style.display = 'none';
+    const modal = document.getElementById('giftDetailsModal');
+    modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
@@ -973,6 +1076,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
 
     const form = this;
     const formData = new FormData(form);
+
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
 
@@ -1041,6 +1145,7 @@ document.getElementById('giftDetailsForm').addEventListener('submit', function(e
 </script>
 
 @push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 // Initialize Swiper for gift images after library loads
