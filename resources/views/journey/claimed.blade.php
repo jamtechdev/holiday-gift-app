@@ -373,9 +373,9 @@ form[method="POST"] button:hover {
                         </p>
                     </div>
                     <div class="cta-btn-wrapper">
-                        <a href="mailto:mike.mivska@thinkgraphtech.com" class="email-btn">Email</a>
+                        <a href="mailto:Mike.mikyska@thinkgraphtech.com" class="email-btn">Email</a>
                         <div class="email-note">
-                            <a href="mailto:mike.mivska@thinkgraphtech.com">Mike.mivska@thinkgraphtech.com</a>
+                            <a href="mailto:Mike.mikyska@thinkgraphtech.com">Mike.mikyska@thinkgraphtech.com</a>
                         </div>
                     </div>
                 </div>

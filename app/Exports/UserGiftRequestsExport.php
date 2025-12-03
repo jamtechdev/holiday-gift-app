@@ -28,15 +28,20 @@ class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMappin
     public function headings(): array
     {
         return [
-            'Name',
+            'First Name',
+            'Last Name',
             'Email',
             'Category',
             'Street Address',
+            'Street Address 2',
             'City',
             'State',
-            'Zip',
+            'Postal Code',
+            'Country',
             'Company',
             'Telephone',
+            'Country Code',
+            'Charity Selection',
             'Submitted At',
         ];
     }
@@ -44,20 +49,22 @@ class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMappin
     public function map($request): array
     {
         $phoneNumber = $request->telephone ?? '';
-        if ($request->country_code) {
-            $phoneNumber = $request->country_code . ' ' . $phoneNumber;
-        }
         
         return [
             $request->name,
+            $request->lastname ?? '',
             $request->email,
             $request->category?->name ?? 'Uncategorized',
             $request->street_address,
+            $request->street_address2 ?? '',
             $request->city,
             $request->state,
             $request->zip,
-            $request->company,
+            $request->country ?? '',
+            $request->company ?? '',
             $phoneNumber,
+            $request->country_code ?? '',
+            $request->charity_selection ?? '',
             $request->created_at?->format('Y-m-d H:i'),
         ];
     }

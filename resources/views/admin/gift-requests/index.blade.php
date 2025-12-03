@@ -52,16 +52,22 @@
             <tbody>
                 @foreach($requests as $request)
                     <tr style="border-bottom: 1px solid #f3f4f6;">
-                        <td class="table-cell">{{ $request->name }}</td>
+                        <td class="table-cell">{{ $request->name }} {{ $request->lastname ?? '' }}</td>
                         <td class="table-cell muted-text">{{ $request->email }}</td>
                         <td class="table-cell">
                             <span class="category-badge">{{ $request->category->name ?? 'Uncategorized' }}</span>
                         </td>
                         <td class="table-cell muted-text">
                             {{ $request->street_address ?? '—' }}
+                            @if($request->street_address2)
+                                <br><small style="color: #9ca3af;">{{ $request->street_address2 }}</small>
+                            @endif
                         </td>
                         <td class="table-cell muted-text">
                             {{ $request->city }}, {{ $request->state }} {{ $request->zip }}
+                            @if($request->country)
+                                <br><small style="color: #9ca3af;">{{ $request->country }}</small>
+                            @endif
                         </td>
                         <td class="table-cell muted-text">
                             {{ $request->company ?? '—' }}

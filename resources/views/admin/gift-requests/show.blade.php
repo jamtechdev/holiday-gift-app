@@ -8,7 +8,7 @@
     <div class="detail-header-section">
         <div>
             <p class="detail-eyebrow">Request #{{ $userGiftRequest->id }}</p>
-            <h3 class="detail-title">{{ $userGiftRequest->name }}</h3>
+            <h3 class="detail-title">{{ $userGiftRequest->name }} {{ $userGiftRequest->lastname ?? '' }}</h3>
             <div class="detail-meta">
                 Submitted on {{ $userGiftRequest->created_at->format('M d, Y \\a\\t h:i A') }}
                 · {{ $userGiftRequest->email }}
@@ -24,6 +24,14 @@
             <div class="detail-group">
                 <div class="detail-group-heading">Personal Information</div>
                 <dl class="detail-list">
+                    <div>
+                        <dt>First Name</dt>
+                        <dd>{{ $userGiftRequest->name }}</dd>
+                    </div>
+                    <div>
+                        <dt>Last Name</dt>
+                        <dd>{{ $userGiftRequest->lastname ?? '—' }}</dd>
+                    </div>
                     <div>
                         <dt>Email</dt>
                         <dd>{{ $userGiftRequest->email }}</dd>
@@ -43,17 +51,33 @@
                 <div class="detail-group-heading">Shipping Address</div>
                 <dl class="detail-list">
                     <div>
-                        <dt>Street</dt>
+                        <dt>Street Address</dt>
                         <dd>{{ $userGiftRequest->street_address }}</dd>
                     </div>
+                    @if($userGiftRequest->street_address2)
+                    <div>
+                        <dt>Street Address 2</dt>
+                        <dd>{{ $userGiftRequest->street_address2 }}</dd>
+                    </div>
+                    @endif
                     <div>
                         <dt>City</dt>
                         <dd>{{ $userGiftRequest->city }}</dd>
                     </div>
                     <div>
-                        <dt>State · ZIP</dt>
-                        <dd>{{ $userGiftRequest->state }} {{ $userGiftRequest->zip }}</dd>
+                        <dt>State</dt>
+                        <dd>{{ $userGiftRequest->state }}</dd>
                     </div>
+                    <div>
+                        <dt>Postal Code</dt>
+                        <dd>{{ $userGiftRequest->zip }}</dd>
+                    </div>
+                    @if($userGiftRequest->country)
+                    <div>
+                        <dt>Country</dt>
+                        <dd>{{ $userGiftRequest->country }}</dd>
+                    </div>
+                    @endif
                 </dl>
             </div>
         </div>
