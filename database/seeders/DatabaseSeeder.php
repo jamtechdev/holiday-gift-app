@@ -23,9 +23,16 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@holiday.test'],
             [
                 'name' => 'Holiday Admin',
+                'first_name' => 'Holiday',
+                'last_name' => 'Admin',
                 'password' => Hash::make('Password123!'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
+                'street_address' => '123 Admin Street',
+                'apt_suite_unit' => 'Suite 100',
+                'city' => 'New York',
+                'state' => 'NY',
+                'zip' => '10001',
             ],
         );
     }
@@ -36,9 +43,16 @@ class DatabaseSeeder extends Seeder
             ['email' => 'user@holiday.test'],
             [
                 'name' => 'Journey Tester',
+                'first_name' => 'Journey',
+                'last_name' => 'Tester',
                 'password' => Hash::make('Password123!'),
                 'role' => 'user',
                 'email_verified_at' => now(),
+                'street_address' => '456 Test Avenue',
+                'apt_suite_unit' => 'Apt 5B',
+                'city' => 'Los Angeles',
+                'state' => 'CA',
+                'zip' => '90001',
             ],
         );
     }

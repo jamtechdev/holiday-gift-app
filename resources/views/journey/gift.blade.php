@@ -855,7 +855,9 @@ button.logout:hover {
                         <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
                         <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
                       </div>
+                      @if (strtolower($category->name ?? '') === 'donation')
                         <span class="price"><sup>$</sup>20</span>
+                        @endif
                     </a>
                    <div>
                     <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
@@ -980,9 +982,10 @@ button.logout:hover {
 
                 <!-- Country and State in one row -->
                 <div class="form-row">
+
                     <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" id="country" name="country" placeholder="Country">
+                        <label for="city">City *</label>
+                        <input type="text" id="city" name="city" required placeholder="City">
                     </div>
                     <div class="form-group">
                         <label for="state">State *</label>
@@ -993,13 +996,14 @@ button.logout:hover {
                 <!-- City and Postal Code in one row -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="city">City *</label>
-                        <input type="text" id="city" name="city" required placeholder="City">
-                    </div>
-                    <div class="form-group">
                         <label for="zip">Postal Code *</label>
                         <input type="text" id="zip" name="zip" required maxlength="5" placeholder="12345" pattern="[0-9]{5}">
                     </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" placeholder="Country">
+                    </div>
+
                 </div>
 
                 <!-- Phone Number and Company in one row -->

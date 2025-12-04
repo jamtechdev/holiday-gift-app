@@ -23,13 +23,33 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $firstName = fake()->firstName();
+        $lastName = fake()->lastName();
+        
+        // Generate apt_suite_unit optionally (70% chance)
+        $aptSuiteUnit = null;
+        if (fake()->boolean(70)) {
+            $aptSuiteUnit = fake()->randomElement([
+                'Apt ' . fake()->numberBetween(1, 999),
+                'Suite ' . fake()->numberBetween(100, 999),
+                'Unit ' . fake()->randomLetter() . fake()->numberBetween(1, 99)
+            ]);
+        }
+        
         return [
-            'name' => fake()->name(),
+            'name' => $firstName . ' ' . $lastName,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'role' => 'user',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'street_address' => fake()->streetAddress(),
+            'apt_suite_unit' => $aptSuiteUnit,
+            'city' => fake()->city(),
+            'state' => fake()->stateAbbr(),
+            'zip' => fake()->postcode(),
         ];
     }
 
