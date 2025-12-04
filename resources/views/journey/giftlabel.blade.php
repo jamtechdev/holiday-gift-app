@@ -424,6 +424,12 @@ a.category-link.shape-3 span {
             .desktopVideo {
                 display: none;
             }
+            .choose-bottom {
+
+  bottom: 10% !important;
+
+  max-width: 150px !important;
+}
         }
 
         /* Initially hide gift container */
@@ -438,6 +444,14 @@ a.category-link.shape-3 span {
             opacity: 1;
             visibility: visible;
         }
+        
+        .choose-bottom {
+  position: absolute;
+  left: 22%;
+  bottom: 0;
+  width: 100%;
+  max-width: 250px;
+}
 </style>
 
 <!-- Video Section - Shows first -->
@@ -486,7 +500,7 @@ a.category-link.shape-3 span {
                 <img src="{{ asset('images/back.png') }}" />
             </a>
         </div>
-
+            <img class="choose-bottom" src="{{ asset('images/choose-bttom.png') }}" alt="">
     </div>
 </div>
 
