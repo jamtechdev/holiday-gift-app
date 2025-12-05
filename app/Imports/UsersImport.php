@@ -12,7 +12,7 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation
 {
     public function model(array $row)
     {
-        $password = !empty($row['password']) ? $row['password'] : 'password123';
+        $password = !empty($row['password']) ? $row['password'] : 'Holiday2025';
 
         // Handle both 'customer' field (full name) and separate first_name/last_name
         $firstName = $row['first_name'] ?? '';
@@ -25,26 +25,31 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation
             $lastName = $nameParts[1] ?? '';
         }
 
-        return new User([
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'name' => trim(($firstName ?? '') . ' ' . ($lastName ?? '')), // Keep name for backward compatibility
-            'email' => $row['email'] ?? '',
-            'password' => Hash::make($password),
-            'street_address' => $row['street_address'] ?? $row['street address'] ?? null,
-            'apt_suite_unit' => $row['apt_suite_unit'] ?? $row['apt., suite, unit'] ?? $row['apt suite unit'] ?? null,
-            'city' => $row['city'] ?? null,
-            'state' => $row['state'] ?? null,
-            'zip' => $row['zip'] ?? null,
-            'country' => $row['country'] ?? null,
-            'role' => 'user',
-        ]);
+        $email = $row['email'] ?? '';
+
+        // Update existing user or create new one
+        return User::updateOrCreate(
+            ['email' => $email],
+            [
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'name' => trim(($firstName ?? '') . ' ' . ($lastName ?? '')),
+                'password' => Hash::make($password),
+                'street_address' => $row['street_address'] ?? $row['street address'] ?? null,
+                'apt_suite_unit' => $row['apt_suite_unit'] ?? $row['apt., suite, unit'] ?? $row['apt suite unit'] ?? null,
+                'city' => $row['city'] ?? null,
+                'state' => $row['state'] ?? null,
+                'zip' => $row['zip'] ?? null,
+                'country' => $row['country'] ?? null,
+                'role' => 'user',
+            ]
+        );
     }
 
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email',
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'nullable|string|max:255',
             'customer' => 'nullable|string|max:255',
