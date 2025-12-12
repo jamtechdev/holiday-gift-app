@@ -6,9 +6,10 @@ use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Illuminate\Support\Facades\Hash;
 
-class UsersImport implements ToModel, WithHeadingRow, WithValidation
+class UsersImport implements ToModel, WithHeadingRow, WithValidation, SkipsEmptyRows
 {
     public function model(array $row)
     {
@@ -27,22 +28,33 @@ class UsersImport implements ToModel, WithHeadingRow, WithValidation
 
         $email = $row['email'] ?? '';
 
-        // Update existing user or create new one
+        // Check if user with this email exists and has admin role - skip if admin
+        $existingUser = User::where('email', $email)->first();
+        if ($existingUser && $existingUser->hasRole('admin')) {
+            // Skip import for admin users - don't change anything
+            return null;
+        }
+
+        // Prepare data array
+        $userData = [
+            'first_name' => $firstName,
+            'last_name' => $lastName,
+            'name' => trim(($firstName ?? '') . ' ' . ($lastName ?? '')),
+            'password' => Hash::make($password),
+            'street_address' => $row['street_address'] ?? $row['street address'] ?? null,
+            'apt_suite_unit' => $row['apt_suite_unit'] ?? $row['apt., suite, unit'] ?? $row['apt suite unit'] ?? null,
+            'city' => $row['city'] ?? null,
+            'state' => $row['state'] ?? null,
+            'zip' => $row['zip'] ?? null,
+            'country' => $row['country'] ?? null,
+            'role' => 'user',
+        ];
+
+        // For users, use updateOrCreate (update if exists, create if not)
+        // But only if they are not admin
         return User::updateOrCreate(
             ['email' => $email],
-            [
-                'first_name' => $firstName,
-                'last_name' => $lastName,
-                'name' => trim(($firstName ?? '') . ' ' . ($lastName ?? '')),
-                'password' => Hash::make($password),
-                'street_address' => $row['street_address'] ?? $row['street address'] ?? null,
-                'apt_suite_unit' => $row['apt_suite_unit'] ?? $row['apt., suite, unit'] ?? $row['apt suite unit'] ?? null,
-                'city' => $row['city'] ?? null,
-                'state' => $row['state'] ?? null,
-                'zip' => $row['zip'] ?? null,
-                'country' => $row['country'] ?? null,
-                'role' => 'user',
-            ]
+            $userData
         );
     }
 

@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 
 class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMapping
 {
-    public function __construct(private readonly ?int $categoryId = null)
+    public function __construct(private readonly ?int $categoryId = null, private readonly ?string $search = null)
     {
     }
 
@@ -20,6 +20,26 @@ class UserGiftRequestsExport implements FromCollection, WithHeadings, WithMappin
 
         if ($this->categoryId) {
             $query->where('category_id', $this->categoryId);
+        }
+
+        // Apply search filter if provided
+        if ($this->search) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', "%{$this->search}%")
+                    ->orWhere('lastname', 'like', "%{$this->search}%")
+                    ->orWhere('email', 'like', "%{$this->search}%")
+                    ->orWhere('company', 'like', "%{$this->search}%")
+                    ->orWhere('street_address', 'like', "%{$this->search}%")
+                    ->orWhere('street_address2', 'like', "%{$this->search}%")
+                    ->orWhere('city', 'like', "%{$this->search}%")
+                    ->orWhere('state', 'like', "%{$this->search}%")
+                    ->orWhere('zip', 'like', "%{$this->search}%")
+                    ->orWhere('country', 'like', "%{$this->search}%")
+                    ->orWhere('telephone', 'like', "%{$this->search}%")
+                    ->orWhereHas('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'like', "%{$this->search}%");
+                    });
+            });
         }
 
         return $query->get();

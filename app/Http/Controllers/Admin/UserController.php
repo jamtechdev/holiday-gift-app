@@ -13,12 +13,42 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::where('role', 'user')
-            ->orderBy('name')
-            ->paginate(8);
-        return view('admin.users.index', compact('users'));
+        $search = $request->query('search');
+        
+        $usersQuery = User::where('role', 'user')->orderBy('name');
+
+        // Full search across multiple fields
+        if ($search) {
+            $usersQuery->where(function ($query) use ($search) {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('street_address', 'like', "%{$search}%")
+                    ->orWhere('apt_suite_unit', 'like', "%{$search}%")
+                    ->orWhere('city', 'like', "%{$search}%")
+                    ->orWhere('state', 'like', "%{$search}%")
+                    ->orWhere('zip', 'like', "%{$search}%")
+                    ->orWhere('country', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $usersQuery->paginate(20)->withQueryString();
+
+        // Return JSON only for actual AJAX requests (not direct URL visits with ajax=1)
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'html' => view('admin.users.partials.table', compact('users'))->render(),
+                'pagination' => view('partials.admin.pagination', [
+                    'paginator' => $users,
+                    'itemLabel' => 'users'
+                ])->render(),
+            ]);
+        }
+
+        return view('admin.users.index', compact('users', 'search'));
     }
 
     public function create()
@@ -99,7 +129,8 @@ class UserController extends Controller
     public function export(Request $request)
     {
         try {
-            return Excel::download(new UsersExport, 'users.xlsx');
+            $search = $request->query('search');
+            return Excel::download(new UsersExport($search), 'users.xlsx');
         } catch (\Exception $e) {
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
@@ -119,6 +150,7 @@ class UserController extends Controller
                 'file' => 'required|mimes:xlsx,xls,csv|max:10240' // Max 10MB
             ]);
 
+            // Import users - admin users will be skipped automatically during import
             Excel::import(new UsersImport, $request->file('file'));
 
             if ($request->wantsJson() || $request->ajax()) {

@@ -12,9 +12,9 @@
     </div>
     <div class="pagination-controls" role="navigation" aria-label="Pagination Navigation">
         @if ($paginator->onFirstPage())
-            <span class="page-btn disabled">Prev</span>
+            <span class="page-btn disabled">PREV</span>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}" class="page-btn">Prev</a>
+            <a href="{{ $paginator->previousPageUrl() }}" class="page-btn">PREV</a>
         @endif
 
         @if($start > 1)
@@ -40,9 +40,9 @@
         @endif
 
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" class="page-btn">Next</a>
+            <a href="{{ $paginator->nextPageUrl() }}" class="page-btn">NEXT</a>
         @else
-            <span class="page-btn disabled">Next</span>
+            <span class="page-btn disabled">NEXT</span>
         @endif
     </div>
 </div>
