@@ -42,29 +42,34 @@
     </div>
     
     @if($stats['recent_requests']->count() > 0)
-        <div style="overflow-x: auto;">
+        <div class="table-scroll-container" style="padding: 0; max-height: 500px;">
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="border-bottom: 2px solid #e5e7eb;">
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Name</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Email</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Gift Label</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Location</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Date</th>
-                        <th style="padding: 0.75rem; text-align: left; font-weight: 600; color: #374151;">Action</th>
+                        <th class="table-head-cell">Name</th>
+                        <th class="table-head-cell">Email</th>
+                        <th class="table-head-cell">Gift Label</th>
+                        <th class="table-head-cell">Location</th>
+                        <th class="table-head-cell">Date</th>
+                        <th class="table-head-cell">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($stats['recent_requests'] as $request)
-                        <tr style="border-bottom: 1px solid #f3f4f6;">
-                            <td style="padding: 0.75rem; color: #111827;">{{ $request->name }}</td>
-                            <td style="padding: 0.75rem; color: #6b7280;">{{ $request->email }}</td>
-                            <td style="padding: 0.75rem;">
-                                <span class="category-badge">{{ $request->category->name }}</span>
+                        <tr style="border-bottom: 1px solid #e5e7eb; background-color: #ffffff;">
+                            <td class="table-cell">{{ $request->name }} {{ $request->lastname ?? '' }}</td>
+                            <td class="table-cell muted-text">{{ $request->email }}</td>
+                            <td class="table-cell">
+                                <span class="category-badge">{{ $request->category->name ?? 'Uncategorized' }}</span>
                             </td>
-                            <td style="padding: 0.75rem; color: #6b7280;">{{ $request->city }}, {{ $request->state }}</td>
-                            <td style="padding: 0.75rem; color: #6b7280;">{{ $request->created_at->format('M d, Y') }}</td>
-                            <td style="padding: 0.75rem;">
+                            <td class="table-cell muted-text">
+                                {{ $request->city }}{{ $request->city && $request->state ? ',' : '' }} {{ $request->state }}
+                                @if($request->country)
+                                    <br><small style="color: #9ca3af;">{{ $request->country }}</small>
+                                @endif
+                            </td>
+                            <td class="table-cell muted-text">{{ $request->created_at->format('M d, Y') }}</td>
+                            <td class="table-cell">
                                 <a href="{{ route('admin.gift-requests.show', $request) }}" class="admin-btn-sm">View</a>
                             </td>
                         </tr>
