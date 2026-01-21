@@ -1184,6 +1184,8 @@ const demoMode = true; // Always true in demo views
 function showGiftInfo(giftId, giftName) {
     // Always in demo mode - show contact message only
     const modal = document.getElementById('giftDetailsModal');
+    if (!modal) return;
+    
     const modalTitle = document.getElementById('modal-title');
     const contactMsg = modal.querySelector('.demo-contact-message');
     
@@ -1220,6 +1222,8 @@ function openModal(categoryId, categoryName = '') {
 
 function closeModal() {
     const modal = document.getElementById('giftDetailsModal');
+    if (!modal) return;
+    
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
@@ -1235,9 +1239,12 @@ function closeModalWithConfirm() {
 }
 
 // Auto-uppercase for state field
-document.getElementById('state').addEventListener('input', function(e) {
-    e.target.value = e.target.value.toUpperCase();
-});
+const stateField = document.getElementById('state');
+if (stateField) {
+    stateField.addEventListener('input', function(e) {
+        e.target.value = e.target.value.toUpperCase();
+    });
+}
 
 // Handle form submission - COMPLETELY BLOCKED IN DEMO MODE
 // Form is hidden and should never be submitted, but add extra protection
