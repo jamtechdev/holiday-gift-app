@@ -357,14 +357,6 @@ img.bgImage {
 </div> -->
 
 <div class="box animate fadeInRight four">
-  <!-- Demo Notice Banner -->
-  <div style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 10000; background: rgba(220, 208, 143, 0.95); border: 2px solid #dcd08f; border-radius: 8px; padding: 12px 20px; max-width: 90%; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
-    <p style="color: #1a1a1a; font-size: 14px; margin: 0; font-weight: 500; text-align: center;">
-      <strong>Demo Experience</strong> - This is a sample of our holiday gifting platform. 
-      <a href="mailto:info@thinkgraphtech.com" style="color: #1a1a1a; text-decoration: underline; font-weight: 600;">Contact us</a> to learn more.
-    </p>
-  </div>
-  
   <a href="{{ route('demo.gift.categories') }}" class="next-btn">
     <img src="{{ asset('images/holiday-store-btn.png') }}" class="overlayImg hidedMobile" />
     <img src="{{ asset('images/store-mobile.png') }}" class="overlayImg hidedDesktop" />
