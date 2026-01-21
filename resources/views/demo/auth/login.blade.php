@@ -109,7 +109,7 @@ cursor: pointer;
 </style>
 <div class="login-container logBgImg" style="">
     <div class="puzzle-form-container">
-        <form method="POST" action="{{ request()->is('2025season*') ? route('demo.login.submit') : route('login.submit') }}" class="puzzle-form">
+        <form method="POST" action="{{ route('demo.login.submit') }}" class="puzzle-form">
             @csrf
 
             <div class="form-group">

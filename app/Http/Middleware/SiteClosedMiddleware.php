@@ -35,6 +35,11 @@ class SiteClosedMiddleware
                 return $next($request);
             }
             
+            // Allow demo routes (/2025season/*) to pass through even when site is closed
+            if ($request->is('2025season*')) {
+                return $next($request);
+            }
+            
             // Block all other routes (user routes and public routes)
             // User role users cannot access their routes when site is closed
             return response()->view('site-closed');

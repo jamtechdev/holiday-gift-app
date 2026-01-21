@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->seedAdmin();
         $this->seedTestUser();
+        $this->seedDemoUser();
     }
 
     protected function seedAdmin(): void
@@ -53,6 +54,22 @@ class DatabaseSeeder extends Seeder
                 'city' => 'Los Angeles',
                 'state' => 'CA',
                 'zip' => '90001',
+            ],
+        );
+    }
+
+    protected function seedDemoUser(): void
+    {
+        // Create demo user with email that can be accessed via "Graphtech" username
+        User::updateOrCreate(
+            ['email' => 'graphtech@thinkgraphtech.com'],
+            [
+                'name' => 'Graphtech',
+                'first_name' => 'Graphtech',
+                'last_name' => 'Demo',
+                'password' => Hash::make('Holiday'),
+                'role' => 'user',
+                'email_verified_at' => now(),
             ],
         );
     }

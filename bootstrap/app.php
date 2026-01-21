@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\DemoModeMiddleware;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\SiteClosedMiddleware;
 use Illuminate\Foundation\Application;
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => RoleMiddleware::class,
+            'demo' => DemoModeMiddleware::class,
         ]);
         
         // Apply site closed middleware globally to all web routes

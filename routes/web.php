@@ -29,6 +29,28 @@ Route::prefix('user')->name('user.')->group(function () {
     });
 });
 
+// Demo routes - prefixed with '2025season' for demo site
+// These routes bypass site-closed check and are completely separate
+Route::prefix('2025season')->name('demo.')->middleware('demo')->group(function () {
+    // Demo login routes - public
+    Route::get('/', [\App\Http\Controllers\Demo\AuthController::class, 'showLogin'])->name('login');
+    Route::post('/', [\App\Http\Controllers\Demo\AuthController::class, 'login'])->name('login.submit');
+
+    // Demo user routes - require authentication
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [\App\Http\Controllers\Demo\AuthController::class, 'logout'])->name('logout');
+
+        Route::get('/journey', [\App\Http\Controllers\Demo\UserJourneyController::class, 'index'])->name('journey');
+        Route::get('/gift-categories', [\App\Http\Controllers\Demo\UserJourneyController::class, 'giftCategories'])->name('gift.categories');
+        Route::get('/gifts/category/{category}', [\App\Http\Controllers\Demo\UserJourneyController::class, 'showGiftsByCategory'])->name('gifts.byCategory');
+        Route::get('/claimed', [\App\Http\Controllers\Demo\UserJourneyController::class, 'claimed'])->name('claimed');
+        Route::get('/already-claimed', [\App\Http\Controllers\Demo\UserJourneyController::class, 'alreadyClaimed'])->name('already.claimed');
+
+        // Demo gift request route - always blocked
+        Route::post('/gift-request', [\App\Http\Controllers\Demo\GiftRequestController::class, 'store'])->name('gift-request.store');
+    });
+});
+
 // Admin routes - prefixed with 'admin' and named with 'admin.*'
 // Protected by 'role:admin' middleware to prevent regular users from accessing
 Route::prefix('admin')->name('admin.')->group(function () {

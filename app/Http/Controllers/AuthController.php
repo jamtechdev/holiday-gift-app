@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function showLogin(): View|RedirectResponse
+    public function showLogin(): View|RedirectResponse|Response
     {
+        // Check if site is closed
+        if (\Illuminate\Support\Facades\Storage::exists('site-closed.txt')) {
+            return response()->view('site-closed');
+        }
+        
         if (Auth::check()) {
             return $this->redirectFor(Auth::user());
         }
@@ -65,6 +71,13 @@ class AuthController extends Controller
 
     public function login(Request $request): RedirectResponse
     {
+        // Check if site is closed
+        if (\Illuminate\Support\Facades\Storage::exists('site-closed.txt')) {
+            return redirect()->route('login')->withErrors([
+                'email' => 'The site is currently closed.',
+            ]);
+        }
+        
         if (Auth::check()) {
             return $this->redirectFor(Auth::user());
         }
@@ -76,7 +89,6 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-
         $remember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $remember)) {
@@ -103,9 +115,11 @@ class AuthController extends Controller
 
     protected function redirectFor(User $user): RedirectResponse
     {
-        return $user->isAdmin()
-            ? redirect()->route('admin.dashboard')
-            : redirect()->route('user.journey');
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        }
+        
+        return redirect()->route('user.journey');
     }
 }
 

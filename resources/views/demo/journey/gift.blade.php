@@ -614,6 +614,13 @@ img.giftbox {
     border: 1px solid #dcd08f !important;
     padding: 7px 14px;
     border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.claim-btn:hover {
+    background: linear-gradient(135deg, rgba(220, 208, 143, 0.3) 0%, rgba(184, 168, 90, 0.3) 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 208, 143, 0.4);
 }
 
 /* Logout Button Styles */
@@ -783,10 +790,199 @@ button.logout:hover {
     display: flex;
     column-gap: 17px;
 }
+
+/* Demo Notice Modal Styles */
+.demo-notice-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeInOverlay 0.4s ease-out forwards;
+}
+
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutOverlay {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.demo-notice-modal {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98) 0%, rgba(35, 35, 35, 0.98) 100%);
+    border: 3px solid #dcd08f;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(220, 208, 143, 0.3);
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    animation: slideUpModal 0.5s ease-out 0.2s forwards;
+    text-align: center;
+}
+
+@keyframes slideUpModal {
+    from {
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.demo-notice-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: 2px solid #dcd08f;
+    color: #dcd08f;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.demo-notice-modal .close-btn:hover {
+    background: #dcd08f;
+    color: #1a1a1a;
+    transform: rotate(90deg);
+}
+
+.demo-notice-modal h3 {
+    color: #dcd08f;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.demo-notice-modal .icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: bounceIcon 2s ease-in-out infinite;
+}
+
+@keyframes bounceIcon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.demo-notice-modal p {
+    color: #dcd08f;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.demo-notice-modal .highlight-box {
+    background: rgba(220, 208, 143, 0.1);
+    border: 2px solid #dcd08f;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.demo-notice-modal .highlight-box p {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.demo-notice-modal .email-link {
+    color: #dcd08f;
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.demo-notice-modal .email-link:hover {
+    color: #f5e8b8;
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(220, 208, 143, 0.5);
+}
+
+.demo-notice-modal .continue-btn {
+    background: linear-gradient(135deg, #dcd08f 0%, #b8a85a 100%);
+    color: #1a1a1a;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(220, 208, 143, 0.3);
+}
+
+.demo-notice-modal .continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 208, 143, 0.5);
+}
+
+@media screen and (max-width: 667.99px) {
+    .demo-notice-modal {
+        padding: 30px 20px;
+        max-width: 95%;
+    }
+    
+    .demo-notice-modal h3 {
+        font-size: 22px;
+    }
+    
+    .demo-notice-modal p {
+        font-size: 14px;
+    }
+    
+    .demo-notice-modal .icon {
+        font-size: 36px;
+    }
+}
 </style>
 
 <div class="gift-container" >
-    <form method="POST" action="{{ route('user.logout') }}" style="display: inline;">
+    <form method="POST" action="{{ route('demo.logout') }}" style="display: inline;">
         @csrf
         <button type="submit" class="logout">
             <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
@@ -850,35 +1046,17 @@ button.logout:hover {
                             <img src="{{ asset('images/'.$giftBoxImage) }}" class="giftbox" alt="{{ $gift->name }}"/>
                         @endif
                     </a>
-                    @if(isset($demoMode) && $demoMode)
-                        <a href="#" onclick="event.preventDefault(); showGiftInfo({{ $gift->id }}, '{{ $gift->name }}');" style="cursor: pointer;">
-                          <div class="swap">
-                            <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
-                            <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
-                          </div>
-                          @if (strtolower($category->name ?? '') === 'donation')
-                            <span class="price"><sup>$</sup>20</span>
-                          @endif
-                        </a>
-                    @else
-                        <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
-                          <div class="swap">
-                            <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
-                            <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
-                          </div>
-                          @if (strtolower($category->name ?? '') === 'donation')
-                            <span class="price"><sup>$</sup>20</span>
-                          @endif
-                        </a>
-                    @endif
+                <a href="#" onclick="event.preventDefault(); showGiftInfo({{ $gift->id }}, '{{ $gift->name }}');" style="cursor: pointer;">
+                  <div class="swap">
+                    <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
+                    <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
+                  </div>
+                  @if (strtolower($category->name ?? '') === 'donation')
+                    <span class="price"><sup>$</sup>20</span>
+                  @endif
+                </a>
                    <div>
-                    @if(isset($demoMode) && $demoMode)
-                        <p style="color: #dcd08f; text-align: center; margin-top: 15px; font-size: 14px; line-height: 1.5; padding: 0 10px;">
-                            For more information about this holiday gifting experience, contact us at <a href="mailto:info@thinkgraphtech.com" style="color: #dcd08f; text-decoration: underline;">info@thinkgraphtech.com</a>.
-                        </p>
-                    @else
-                        <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
-                    @endif
+                    <button class="claim-btn" type="button" onclick="showGiftInfo({{ $gift->id }}, '{{ $gift->name }}')" style="cursor: pointer;">Claim</button>
                    </div>
                 </div>
             @endforeach
@@ -887,31 +1065,15 @@ button.logout:hover {
                 <a href="#">
                     <img src="{{ asset('images/giftbox.png') }}" class="giftbox"/>
                 </a>
-                @if(isset($demoMode) && $demoMode)
-                    <a href="#" onclick="event.preventDefault(); showGiftInfoDemo();" style="cursor: pointer;">
-                        <div class="swap">
-                            <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
-                            <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
-                        </div>
-                        <span class="price"><sup>€</sup>20</span>
-                    </a>
-                @else
-                    <a href="#" onclick="event.preventDefault(); openModal({{ $category->id }}, '{{ strtolower($category->name) }}');" style="cursor: pointer;">
-                        <div class="swap">
-                            <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
-                            <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
-                        </div>
-                        <span class="price"><sup>€</sup>20</span>
-                    </a>
-                @endif
+                <a href="#" onclick="event.preventDefault(); showGiftInfoDemo();" style="cursor: pointer;">
+                    <div class="swap">
+                        <img src="{{ asset('images/'.$giftImage) }}" class="selectedGift" />
+                        <img src="{{ asset('images/'.$chooseImage) }}" class="choose"/>
+                    </div>
+                    <span class="price"><sup>€</sup>20</span>
+                </a>
 <div>
-    @if(isset($demoMode) && $demoMode)
-        <p style="color: #dcd08f; text-align: center; margin-top: 15px; font-size: 14px; line-height: 1.5; padding: 0 10px;">
-            For more information about this holiday gifting experience, contact us at <a href="mailto:info@thinkgraphtech.com" style="color: #dcd08f; text-decoration: underline;">info@thinkgraphtech.com</a>.
-        </p>
-    @else
-        <button class="claim-btn" type="button" onclick="openModal({{ $category->id }}, '{{ strtolower($category->name) }}')" style="cursor: pointer;">Claim</button>
-    @endif
+    <button class="claim-btn" type="button" onclick="showGiftInfoDemo()" style="cursor: pointer;">Claim</button>
 </div>
             </div>
         @endif
@@ -931,7 +1093,7 @@ button.logout:hover {
                 @else
                     <a href="#"></a>
                 @endif
-                <a href="{{ (isset($demoMode) && $demoMode) ? route('demo.gift.categories') : route('user.gift.categories') }}">
+                <a href="{{ route('demo.gift.categories') }}">
                     <img src="{{ asset('images/back.png') }}" class="back" />
                 </a>
                 <a href="#">
@@ -974,100 +1136,40 @@ button.logout:hover {
 <div id="giftDetailsModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 id="modal-title">Add Gift Details</h2>
+            <h2 id="modal-title">Gift Information</h2>
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
         <div class="modal-body">
-            <form id="giftDetailsForm" method="POST">
+            <!-- Demo mode: Only show contact message, no form -->
+            <div class="demo-contact-message" style="text-align: center; padding: 40px 20px;">
+                <div style="margin-bottom: 25px;">
+                    <h3 style="color: #dcd08f; margin-bottom: 15px; font-size: 26px; font-weight: 600;">Thank You for Exploring Our Demo!</h3>
+                    <p style="color: #dcd08f; font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
+                        You're viewing a sample of our holiday gifting platform. This interactive experience demonstrates how organizations can provide their clients, partners, and employees with a seamless gift selection process.
+                    </p>
+                </div>
+                
+                <div style="background: rgba(220, 208, 143, 0.1); border: 2px solid #dcd08f; border-radius: 12px; padding: 25px; margin: 25px 0;">
+                    <p style="color: #dcd08f; font-size: 18px; line-height: 1.8; margin-bottom: 15px; font-weight: 500;">
+                        Interested in implementing this for your organization?
+                    </p>
+                    <p style="color: #dcd08f; font-size: 16px; line-height: 1.8;">
+                        Contact us to learn more about customizing this holiday gifting experience:
+                    </p>
+                    <p style="margin-top: 15px;">
+                        <a href="mailto:info@thinkgraphtech.com?subject=Holiday Gifting Platform Inquiry&body=Hello,%0D%0A%0D%0AI'm interested in learning more about your holiday gifting platform.%0D%0A%0D%0APlease provide more information about implementation and customization options." 
+                           style="color: #dcd08f; text-decoration: underline; font-weight: 600; font-size: 18px;">
+                            info@thinkgraphtech.com
+                        </a>
+                    </p>
+                </div>
+                
+                <button type="button" class="btn btn-secondary" onclick="closeModal()" style="width: 200px; margin-top: 20px; padding: 12px 24px; font-size: 16px;">Close</button>
+            </div>
+            
+            <!-- Hidden form (never shown, never submitted) -->
+            <form id="giftDetailsForm" method="POST" style="display: none;">
                 @csrf
-                <input type="hidden" name="category_id" id="category_id" value="">
-                <input type="hidden" name="redirect_to" value="{{ (isset($demoMode) && $demoMode) ? route('demo.claimed') : route('user.claimed') }}">
-
-                <!-- First Name and Last Name in one row -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">First Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter your first name">
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Last Name *</label>
-                        <input type="text" id="lastname" name="lastname" required placeholder="Enter your last name">
-                    </div>
-                </div>
-
-                <!-- Email -->
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
-                </div>
-
-                <!-- Street Address #1 -->
-                <div class="form-group">
-                    <label for="street_address">Street Address #1 *</label>
-                    <input type="text" id="street_address" name="street_address" required placeholder="Enter street address">
-                </div>
-
-                <!-- Street Address #2 -->
-                <div class="form-group">
-                    <label for="street_address2">Street Address #2</label>
-                    <input type="text" id="street_address2" name="street_address2" placeholder="Enter street address (optional)">
-                </div>
-
-                <!-- Country and State in one row -->
-                <div class="form-row">
-
-                    <div class="form-group">
-                        <label for="city">City *</label>
-                        <input type="text" id="city" name="city" required placeholder="City">
-                    </div>
-                    <div class="form-group">
-                        <label for="state">State *</label>
-                        <input type="text" id="state" name="state" required maxlength="2" placeholder="XX" pattern="[A-Z]{2}" style="text-transform: uppercase;">
-                    </div>
-                </div>
-
-                <!-- City and Postal Code in one row -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="zip">Postal Code *</label>
-                        <input type="text" id="zip" name="zip" required maxlength="5" placeholder="12345" pattern="[0-9]{5}">
-                    </div>
-                    <div class="form-group">
-                        <label for="country">Country</label>
-                        <input type="text" id="country" name="country" placeholder="Country">
-                    </div>
-
-                </div>
-
-                <!-- Phone Number and Company in one row -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="telephone">Phone Number *</label>
-                        <input type="tel" id="telephone" name="telephone" required autocomplete="tel" placeholder="Enter phone number">
-                        <input type="hidden" id="country_code" name="country_code" value="">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company (Optional)</label>
-                        <input type="text" id="company" name="company" placeholder="Enter company name">
-                    </div>
-                </div>
-
-                <!-- Hidden field for charity selection - default wildheart for donation category -->
-                <input type="hidden" id="charity_selection" name="charity_selection" value="">
-
-                <div class="form-actions">
-                    @if(isset($demoMode) && $demoMode)
-                        <div style="text-align: center; padding: 20px 0;">
-                            <p style="color: #dcd08f; font-size: 16px; line-height: 1.6; margin: 0;">
-                                For more information about this holiday gifting experience, contact us at <a href="mailto:info@thinkgraphtech.com" style="color: #dcd08f; text-decoration: underline; font-weight: 600;">info@thinkgraphtech.com</a>.
-                            </p>
-                        </div>
-                        <button type="button" class="btn btn-secondary" onclick="closeModal()" style="width: 100%;">Close</button>
-                    @else
-                        <button type="button" class="btn btn-secondary" onclick="closeModalWithConfirm()">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit & Continue</button>
-                    @endif
-                </div>
             </form>
         </div>
     </div>
@@ -1076,49 +1178,35 @@ button.logout:hover {
 <script>
 // Check if user has already claimed for this category
 const hasClaimed = @json($hasClaimed ?? false);
-const demoMode = @json($demoMode ?? false);
+const demoMode = true; // Always true in demo views
 
 // Function to show gift info in demo mode (view only, no claim)
 function showGiftInfo(giftId, giftName) {
-    if (demoMode) {
-        // Open modal but show contact message instead of form
-        const modal = document.getElementById('giftDetailsModal');
-        const modalBody = modal.querySelector('.modal-body');
-        const form = modal.querySelector('#giftDetailsForm');
-        const modalTitle = document.getElementById('modal-title');
-        
-        // Update modal title
-        if (modalTitle) {
-            modalTitle.textContent = giftName || 'Gift Information';
-        }
-        
-        // Hide the form and show contact message
-        if (form) form.style.display = 'none';
-        
-        // Create or show contact message
-        let contactMsg = modal.querySelector('.demo-contact-message');
-        if (!contactMsg) {
-            contactMsg = document.createElement('div');
-            contactMsg.className = 'demo-contact-message';
-            contactMsg.style.cssText = 'text-align: center; padding: 40px 20px;';
-            modalBody.appendChild(contactMsg);
-        }
-        
-        contactMsg.innerHTML = `
-            <h3 style="color: #dcd08f; margin-bottom: 20px; font-size: 24px;">${giftName || 'Gift'}</h3>
-            <p style="color: #dcd08f; font-size: 18px; line-height: 1.8; margin-bottom: 30px;">
-                For more information about this holiday gifting experience, contact us at 
-                <a href="mailto:info@thinkgraphtech.com" style="color: #dcd08f; text-decoration: underline; font-weight: 600;">info@thinkgraphtech.com</a>.
-            </p>
-            <button type="button" class="btn btn-secondary" onclick="closeModal()" style="width: 200px; margin: 0 auto;">Close</button>
-        `;
-        contactMsg.style.display = 'block';
-        
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        return;
+    // Always in demo mode - show contact message only
+    const modal = document.getElementById('giftDetailsModal');
+    const modalTitle = document.getElementById('modal-title');
+    const contactMsg = modal.querySelector('.demo-contact-message');
+    
+    // Update modal title with gift name
+    if (modalTitle) {
+        modalTitle.textContent = giftName ? (giftName + ' - Information') : 'Gift Information';
     }
-    openModal(giftId, '');
+    
+        // Update contact message with gift name
+        if (contactMsg) {
+            const titleElement = contactMsg.querySelector('h3');
+            if (titleElement && giftName) {
+                titleElement.innerHTML = `Exploring: <span style="font-style: italic;">${giftName}</span>`;
+            }
+        }
+    
+    // Ensure form is hidden and contact message is visible
+    const form = modal.querySelector('#giftDetailsForm');
+    if (form) form.style.display = 'none';
+    if (contactMsg) contactMsg.style.display = 'block';
+    
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
 }
 
 function showGiftInfoDemo() {
@@ -1126,47 +1214,8 @@ function showGiftInfoDemo() {
 }
 
 function openModal(categoryId, categoryName = '') {
-    // In demo mode, show gift info instead
-    if (demoMode) {
-        showGiftInfoDemo();
-        return;
-    }
-    
-    if (hasClaimed) {
-        toastr.error('Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.', 'Already Claimed', {
-            timeOut: 8000,
-            progressBar: true
-        });
-        return;
-    }
-    
-    // Hide demo contact message if it exists
-    const contactMsg = document.querySelector('.demo-contact-message');
-    if (contactMsg) contactMsg.style.display = 'none';
-    
-    // Show the form
-    const form = document.getElementById('giftDetailsForm');
-    if (form) form.style.display = 'block';
-    
-    // Reset modal title
-    const modalTitle = document.getElementById('modal-title');
-    if (modalTitle) {
-        modalTitle.textContent = 'Add Gift Details';
-    }
-
-    document.getElementById('category_id').value = categoryId;
-
-    // Set default charity to wildheart for donation category (hidden)
-    const charitySelectionField = document.getElementById('charity_selection');
-    if (categoryName && categoryName.toLowerCase() === 'donation') {
-        charitySelectionField.value = 'wildheart';
-    } else {
-        charitySelectionField.value = '';
-    }
-
-    const modal = document.getElementById('giftDetailsModal');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    // In demo mode, always show gift info (contact message) instead of form
+    showGiftInfoDemo();
 }
 
 function closeModal() {
@@ -1174,11 +1223,11 @@ function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     
-    // Hide demo contact message and show form again
+    // Ensure form stays hidden and contact message stays visible
     const contactMsg = modal.querySelector('.demo-contact-message');
-    if (contactMsg) contactMsg.style.display = 'none';
     const form = modal.querySelector('#giftDetailsForm');
-    if (form) form.style.display = 'block';
+    if (form) form.style.display = 'none';
+    if (contactMsg) contactMsg.style.display = 'block';
 }
 
 function closeModalWithConfirm() {
@@ -1190,84 +1239,25 @@ document.getElementById('state').addEventListener('input', function(e) {
     e.target.value = e.target.value.toUpperCase();
 });
 
-// Handle form submission with AJAX
-document.getElementById('giftDetailsForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Prevent submission in demo mode
-    if (demoMode) {
-        alert('For more information about this holiday gifting experience, contact us at info@thinkgraphtech.com.');
-        return;
-    }
-
-    const form = this;
-    const formData = new FormData(form);
-
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-
-    // Disable submit button
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-
-    const submitRoute = demoMode ? '{{ route("demo.gift-request.store") }}' : '{{ route("user.gift-request.store") }}';
-    fetch(submitRoute, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'Accept': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json().catch(() => ({ success: true }));
-        }
-        return response.json().then(err => Promise.reject(err));
-    })
-    .then(data => {
-        // Show success toastr
-        toastr.success(data.message || 'Gift request submitted successfully! Your gift will be processed soon.');
-
-        // Close modal after short delay
-        setTimeout(() => {
-            document.getElementById('giftDetailsModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-
-            // Redirect to next page
-            const redirectTo = form.querySelector('input[name="redirect_to"]').value;
-            window.location.href = redirectTo;
-        }, 1500);
-    })
-    .catch(error => {
-        // Re-enable submit button
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-
-        // Check if it's an already claimed error
-        if (error.error === 'already_claimed' || (error.message && error.message.includes('already claimed'))) {
-            // Close form modal
-            document.getElementById('giftDetailsModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-
-            // Show error in toastr
-            const errorMessage = error.message || 'Our records show that you\'ve already claimed your gift for this year. If this is unexpected or you have questions, please contact us at info@thinkgraphtech.com so we can assist you.';
-            toastr.error(errorMessage);
-            return;
-        }
-
-        // Show error message in toastr
-        let errorMessage = 'Please fill all required fields correctly.';
-        if (error.errors) {
-            const firstError = Object.values(error.errors)[0];
-            errorMessage = Array.isArray(firstError) ? firstError[0] : firstError;
-        } else if (error.message) {
-            errorMessage = error.message;
-        }
-
-        toastr.error(errorMessage);
-    });
-});
+// Handle form submission - COMPLETELY BLOCKED IN DEMO MODE
+// Form is hidden and should never be submitted, but add extra protection
+const giftForm = document.getElementById('giftDetailsForm');
+if (giftForm) {
+    // Block all form submissions
+    giftForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        // Always show contact message
+        alert('Thank you for exploring our demo! To learn more about implementing this holiday gifting experience for your organization, please contact us at info@thinkgraphtech.com.');
+        return false;
+    }, true);
+    
+    // Also disable the form completely
+    giftForm.style.display = 'none';
+    giftForm.setAttribute('onsubmit', 'return false;');
+}
 
 </script>
 
@@ -1309,6 +1299,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Demo Notice Modal Functions
+function showDemoNotice() {
+    const modal = document.getElementById('demoNoticeModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeDemoNotice() {
+    const modal = document.getElementById('demoNoticeModal');
+    if (modal) {
+        modal.style.animation = 'fadeOutOverlay 0.3s ease-out forwards';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('demoNoticeModal');
+    if (modal && e.target === modal) {
+        closeDemoNotice();
+    }
+});
 </script>
 @endpush
+
+<!-- Demo Notice Modal -->
+<div id="demoNoticeModal" class="demo-notice-overlay" style="display: none;">
+    <div class="demo-notice-modal">
+        <button class="close-btn" onclick="closeDemoNotice()" aria-label="Close">×</button>
+        <div class="icon">🎁</div>
+        <h3>Welcome to Our Demo Experience</h3>
+        <p>You're exploring a sample of our holiday gifting platform. This interactive experience demonstrates how organizations can provide their clients, partners, and employees with a seamless gift selection process.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Interested in implementing this for your organization?</strong></p>
+            <p>Contact us to learn more about customizing this holiday gifting experience:</p>
+            <a href="mailto:info@thinkgraphtech.com?subject=Holiday Gifting Platform Inquiry&body=Hello,%0D%0A%0D%0AI'm interested in learning more about your holiday gifting platform.%0D%0A%0D%0APlease provide more information about implementation and customization options." 
+               class="email-link">info@thinkgraphtech.com</a>
+        </div>
+        
+        <button class="continue-btn" onclick="closeDemoNotice()">Continue Exploring</button>
+    </div>
+</div>
+
 @endsection
